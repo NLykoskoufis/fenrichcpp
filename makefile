@@ -30,15 +30,17 @@ CXXFLAG_DBG=-g
 LIB_FLAGS=-lz -lgsl -lbz2 -llzma -lgslcblas -lm -lpthread -lcurl
 
 #FILE LISTS 
-BFILE=test
-OFILE=fenrichcpp.cpp
-
+BFILE=bin/fenrichcpp
+#OFILE=obj/fenrichcpp.o 
+#OFILE=$(shell find src -name *.cpp | LC_ALL=C sort)
+#HFILE=$(shell find src -name *.h)
+OFILE=src/*.cpp 
 
 #STATICLY LINKED LIBS
 LIB_FILES=$(HTSLD_LIB)/libhts.a $(BOOST_LIB)/libboost_iostreams.a $(BOOST_LIB)/libboost_program_options.a
 
 #INCLUDE DIRS
-IFLAG=-I$(HTSLD_INC) -I$(BOOST_INC)
+IFLAG=-I$(HTSLD_INC) -I$(BOOST_INC) -isystem lib
 
 # FOR MAC ONLY 
 MZ=/usr/local/opt/zlib/lib/libz.a
@@ -98,7 +100,7 @@ baobab: RMATH_INC=/srv/beegfs/scratch/groups/funpopgen/Tools/R-3.6.1/src/include
 baobab: RMATH_LIB=/srv/beegfs/scratch/groups/funpopgen/Tools/R-3.6.1/src/nmath/standalone/
 baobab: HTSLD_INC=/srv/beegfs/scratch/groups/funpopgen/Tools/htslib-1.9/
 baobab: HTSLD_LIB=/srv/beegfs/scratch/groups/funpopgen/Tools/htslib-1.9/
-baobab: all
+baobab: ${BFILE}
 
 
 install:
