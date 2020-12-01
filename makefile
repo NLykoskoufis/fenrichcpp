@@ -85,6 +85,9 @@ ifeq ($(MAKECMDGOALS),install)
     endif
 endif
 
+
+
+
 #STATIC VERSION (SET UP THE VARIABLES IN THE BEGINING OF THE MAKEFILE)
 personal: BOOST_INC=/Users/nikolaoslykoskoufis/Documents/Programming/Tools/boost_1_74_0/
 personal: BOOST_LIB=/Users/nikolaoslykoskoufis/Documents/Programming/Tools/boost_1_74_0/stage/lib/
@@ -92,7 +95,7 @@ personal: HTSLD_INC=/Users/nikolaoslykoskoufis/Documents/Programming/Tools/htsli
 personal: HTSLD_LIB=/Users/nikolaoslykoskoufis/Documents/Programming/Tools/htslib-1.11/
 personal: CXXFLAG=$(CXXFLAG_REL)
 personal: LDFLAG=$(CXXFLAG_REL)
-personal: $(BFILE)
+personal: ${BFILE}
 
 baobab: BOOST_INC=/srv/beegfs/scratch/groups/funpopgen/Tools/boost_1_71_0/
 baobab: BOOST_LIB=/srv/beegfs/scratch/groups/funpopgen/Tools/boost_1_71_0/stage/lib/
