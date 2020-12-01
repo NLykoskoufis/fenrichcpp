@@ -24,6 +24,7 @@ CXX=g++ -std=c++0x
 #COMPILER FLAGS 
 CXXFLAG_REL=-O3
 CXXFLAG_DBG=-g
+CXXFLAG_WRN=-Wall -Wextra -Wno-sign-compare -Wno-unused-local-typedefs -Wno-deprecated -Wno-unused-parameter
 
 
 #BASE LIBRARIES
@@ -85,7 +86,10 @@ ifeq ($(MAKECMDGOALS),install)
     endif
 endif
 
-
+#STATIC VERSION (SET UP THE VARIABLES IN THE BEGINING OF THE MAKEFILE)
+static: CXXFLAG=$(CXXFLAG_REL) $(CXXFLAG_WRN)
+static: LDFLAG=$(CXXFLAG_REL)
+static: $(BFILE)
 
 
 #STATIC VERSION (SET UP THE VARIABLES IN THE BEGINING OF THE MAKEFILE)
@@ -93,17 +97,13 @@ personal: BOOST_INC=/Users/nikolaoslykoskoufis/Documents/Programming/Tools/boost
 personal: BOOST_LIB=/Users/nikolaoslykoskoufis/Documents/Programming/Tools/boost_1_74_0/stage/lib/
 personal: HTSLD_INC=/Users/nikolaoslykoskoufis/Documents/Programming/Tools/htslib-1.11/
 personal: HTSLD_LIB=/Users/nikolaoslykoskoufis/Documents/Programming/Tools/htslib-1.11/
-personal: CXXFLAG=$(CXXFLAG_REL)
-personal: LDFLAG=$(CXXFLAG_REL)
-personal: ${BFILE}
+personal: static
 
 baobab: BOOST_INC=/srv/beegfs/scratch/groups/funpopgen/Tools/boost_1_71_0/
 baobab: BOOST_LIB=/srv/beegfs/scratch/groups/funpopgen/Tools/boost_1_71_0/stage/lib/
 baobab: HTSLD_INC=/srv/beegfs/scratch/groups/funpopgen/Tools/htslib-1.9/
 baobab: HTSLD_LIB=/srv/beegfs/scratch/groups/funpopgen/Tools/htslib-1.9/
-baobab: CXXFLAG=$(CXXFLAG_REL)
-baobab: LDFLAG=$(CXXFLAG_REL)
-baobab: ${BFILE}
+personal: static
 
 
 install:
