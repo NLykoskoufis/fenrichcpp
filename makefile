@@ -99,10 +99,10 @@ personal: ${BFILE}
 
 baobab: BOOST_INC=/srv/beegfs/scratch/groups/funpopgen/Tools/boost_1_71_0/
 baobab: BOOST_LIB=/srv/beegfs/scratch/groups/funpopgen/Tools/boost_1_71_0/stage/lib/
-baobab: RMATH_INC=/srv/beegfs/scratch/groups/funpopgen/Tools/R-3.6.1/src/include/
-baobab: RMATH_LIB=/srv/beegfs/scratch/groups/funpopgen/Tools/R-3.6.1/src/nmath/standalone/
 baobab: HTSLD_INC=/srv/beegfs/scratch/groups/funpopgen/Tools/htslib-1.9/
 baobab: HTSLD_LIB=/srv/beegfs/scratch/groups/funpopgen/Tools/htslib-1.9/
+baobab: CXXFLAG=$(CXXFLAG_REL)
+baobab: LDFLAG=$(CXXFLAG_REL)
 baobab: ${BFILE}
 
 
