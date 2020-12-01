@@ -27,7 +27,7 @@ CXXFLAG_DBG=-g
 
 
 #BASE LIBRARIES
-LIB_FLAGS=-lz -lgsl -lbz2 -llzma -lgslcblas -lm -lpthread -lcurl
+LIB_FLAGS=-lz -lgsl -lbz2 -llzma -lgslcblas -lm -lpthread -lcurl -Wall -Wextra -Wno-sign-compare -Wno-unused-local-typedefs -Wno-deprecated -Wno-unused-parameter
 
 #FILE LISTS 
 BFILE=bin/fenrichcpp

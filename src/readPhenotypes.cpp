@@ -44,3 +44,5 @@ void fenrich_cpp::readPhenotypes(string fbed){
     cout << positive_strd << " phenotypes on the positive strand" << endl;
     cout << negative_strd << " phenotypes on the negative strand" << endl;
 }
+
+

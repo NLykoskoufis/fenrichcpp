@@ -29,6 +29,9 @@ using namespace std;
 
 class fenrich_cpp {
 public:
+    // REGIONS 
+    string regionPhenotype_chr = "NA";
+    string regionPhenotype;
 
     // PHENOTYPES 
     int phenotype_count;
@@ -39,7 +42,7 @@ public:
     vector < string > phenotype_strand;
     vector < vector < float > > phenotype_val;
     vector < string > phenotype_length;
-    
+    vector < string > phenotype_neg;
     // GENOTYPES 
     int genotype_count=0;
     vector < string > genotype_id;
