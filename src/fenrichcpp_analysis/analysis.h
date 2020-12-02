@@ -28,7 +28,7 @@ public:
 
     int null_count;
     vector < string > null_id;
-    vector < float > maf;
+    vector < float > null_maf;
     vector < int > upstream_distance;
     vector < int > downstream_distance; 
 
@@ -38,6 +38,24 @@ public:
     void readNull(string);
     
 
+    // INLINE FUNCTIONS FOR PERFORMANCE
 
+    int findSNP(vector<string>,string);
+};
 
+//***************************************************************//
+//******************** INLINE FUNCTIONS *************************//
+//***************************************************************//
+
+inline int analysis_cpp::findSNP(vector < string > vec,string snp){
+
+    vector<string>::iterator itr = find(vec.begin(), vec.end(), snp);
+    if(itr != vec.end()){
+        return (distance(vec.begin(),itr));
+    }else{
+        cout << "Element not found in vector" << endl;
+        return(-1);
+    }
 }
+
+#endif /* _FENRICH_CPP_H */

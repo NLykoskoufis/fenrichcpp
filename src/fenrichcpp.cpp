@@ -122,7 +122,6 @@ int  main(int argc, char** argv){
         D.readPhenotypes(vm["bed"].as<string>()); // GENES 
         D.readSignificantQTL(vm["qtl"].as<string>()); // Read nominal QTLs
         D.readGenotypes(vm["vcf"].as<string>()); // TES
-
         D.fenrichcpp_createTEnull(vm["out"].as<string>()); // Run analysis
          
     }

@@ -38,7 +38,7 @@ void fenrich_cpp::readPhenotypes(string fbed){
         }
         linecount++;
     }
-    phenotype_count <- phenotype_id.size();
+    phenotype_count =  phenotype_id.size();
     fd.close();    cout << to_string(phenotype_count) << endl;
     cout << positive_strd << " phenotypes on the positive strand" << endl;
     cout << negative_strd << " phenotypes on the negative strand" << endl;

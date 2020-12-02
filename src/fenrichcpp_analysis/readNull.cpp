@@ -4,8 +4,8 @@ using namespace std;
 
 
 
-void analysis::readNull(string fnull){
-    input_file fnull;
+void analysis_cpp::readNull(string fnull){
+    input_file fd (fnull);
     unsigned int linecount =0;
 
     //read header 
@@ -29,7 +29,7 @@ void analysis::readNull(string fnull){
 
         boost::split(line, buffer, boost::is_any_of("\t"));
         null_id.push_back(line[0]);
-        maf.push_push_back(stof(line[5]));
+        null_maf.push_push_back(stof(line[5]));
         upstream_distance.push_back(stoi(line[6]));
         downstream_distance.push_back(stoi(line[8]));
     }   
