@@ -16,23 +16,26 @@ public:
     // QTL 
     int qtl_count;
     vector < string > qtl_id;
-    vector < string > qtl_chr;
-    vector < int > qtl_start;
     vector < int > qtl_dist_phe_var;
     vector < string > qtl_phe_strand;
-
+    vector < int > qtl_dist_phe_var_from;
+    vector < int > qtl_dist_phe_var_to;
+    vector < float > qtl_maf;
+    vector < float > qtl_maf_from;
+    vector < float > qtl_maf_to;
 
     // NULL
 
     int null_count;
     vector < string > null_id;
-    vector < float > maf_from;
-    vector < float > maf_to;
-    vector < int > upstream_from; 
-    vector < int > upstream_to;
-    vector < int > downstream_from;
-    vector < int > downstream_to;
+    vector < float > maf;
+    vector < int > upstream_distance;
+    vector < int > downstream_distance; 
 
+
+    // READ DATA 
+    void readQTL(string);
+    void readNull(string);
     
 
 
