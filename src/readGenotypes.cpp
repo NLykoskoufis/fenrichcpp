@@ -23,7 +23,6 @@ void fenrich_cpp::readGenotypes(string fvcf){
     bcf1_t * line;
     while(bcf_sr_next_line (sr)){
         linecount ++;
-        genotype_count++;
         if (linecount % 100000 == 0) cout << "Read " << to_string(linecount) << " lines" << endl;
         line = bcf_sr_get_line(sr,0);
         if(line->n_allele == 2){
@@ -49,4 +48,6 @@ void fenrich_cpp::readGenotypes(string fvcf){
 		    } 
         }
     }
+    genotype_count = linecount;
+    cout << "Read " << to_string(genotype_count) << endl;
 }

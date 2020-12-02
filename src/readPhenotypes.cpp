@@ -18,7 +18,6 @@ void fenrich_cpp::readPhenotypes(string fbed){
     boost::split(str, buffer, boost::is_any_of("\t"));
     
     vector < string > line; 
-    phenotype_count = 0;
     // Reading bed file line by line. 
     while(getline(fd, buffer)){
         
@@ -37,10 +36,10 @@ void fenrich_cpp::readPhenotypes(string fbed){
         for (int t=6; t < line.size(); t++){
             phenotype_val.back()[t-6] = stof(line[t]);
         }
-        phenotype_count++;
         linecount++;
     }
-    fd.close();    cout << linecount << endl;
+    phenotype_count <- phenotype_id.size();
+    fd.close();    cout << to_string(phenotype_count) << endl;
     cout << positive_strd << " phenotypes on the positive strand" << endl;
     cout << negative_strd << " phenotypes on the negative strand" << endl;
 }

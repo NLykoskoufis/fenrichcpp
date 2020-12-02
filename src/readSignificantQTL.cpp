@@ -18,7 +18,8 @@ void fenrich_cpp::readSignificantQTL(string fnom){
         qtl_count++;
         linecount++;
         qtl_id.push_back(buffer);
-}
+}   
+    qtl_count = linecount;
     cout << "Read " << to_string(qtl_count) << " significant QTLs." << endl;
     cout << "Read " << to_string(linecount) << " lines." << endl;
 }

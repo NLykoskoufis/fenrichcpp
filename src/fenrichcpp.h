@@ -44,7 +44,7 @@ public:
     vector < string > phenotype_length;
     vector < string > phenotype_neg;
     // GENOTYPES 
-    int genotype_count=0;
+    int genotype_count;
     vector < string > genotype_id;
     vector < string > genotype_chr;
     vector < int > genotype_start;
