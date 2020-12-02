@@ -28,7 +28,7 @@ CXXFLAG_WRN=-Wall -Wextra -Wno-sign-compare -Wno-unused-local-typedefs -Wno-depr
 
 
 #BASE LIBRARIES
-LIB_FLAGS=-lz -lgsl -lbz2 -llzma -lgslcblas -lm -lpthread -lcurl -Wall -Wextra -Wno-sign-compare -Wno-unused-local-typedefs -Wno-deprecated -Wno-unused-parameter
+LIB_FLAGS=-lz -lgsl -lbz2 -llzma -lgslcblas -lm -lpthread -lcurl 
 
 #FILE LISTS 
 BFILE=bin/fenrichcpp
@@ -113,4 +113,4 @@ install:
 
 #COMPILATION RULES 
 $(BFILE):$(OFILE)
-	$(CXX) $^ $(LIB_FILES) -o $@ $(LIB_FLAGS) $(LDFLAG)
+	$(CXX) $^ $(LIB_FILES) -o $@ $(LIB_FLAGS) $(LDFLAG) $(IFLAG)
