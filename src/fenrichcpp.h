@@ -10,7 +10,10 @@
 #include <numeric>
 #include <string>
 #include <cmath>
+#include <map> 
+#include <iterator>
 
+//INCLUDE BOOST LIBRARIES
 #include <boost/algorithm/string.hpp>
 #include <boost/program_options.hpp>
 
@@ -43,6 +46,7 @@ public:
     vector < vector < float > > phenotype_val;
     vector < string > phenotype_length;
     vector < string > phenotype_neg;
+    
     // GENOTYPES 
     int genotype_count;
     vector < string > genotype_id;
@@ -51,9 +55,11 @@ public:
     vector < int > genotype_end;
     vector < vector < float > > genotype_val;
     
+
     // NOMINAL QTL 
     int qtl_count;
-    vector < string > qtl_id;
+    map<string,unsigned int> nomQTL;
+
 
     // MANAGEMENT 
     void fenrichcpp_createTEnull(string);

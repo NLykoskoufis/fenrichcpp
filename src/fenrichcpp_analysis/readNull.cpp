@@ -21,7 +21,6 @@ void analysis_cpp::readNull(string fnull){
     
     // Read Null 
     vector < string > line; 
-    string buffer;
     while(getline(fd, buffer)){
         if (linecount % 1000 == 0) cout << "Read " << to_string(linecount) << " lines" << endl;
         linecount++;
@@ -29,7 +28,7 @@ void analysis_cpp::readNull(string fnull){
 
         boost::split(line, buffer, boost::is_any_of("\t"));
         null_id.push_back(line[0]);
-        null_maf.push_push_back(stof(line[5]));
+        null_maf.push_back(stof(line[5]));
         upstream_distance.push_back(stoi(line[6]));
         downstream_distance.push_back(stoi(line[8]));
     }   

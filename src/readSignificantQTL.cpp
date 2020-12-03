@@ -17,7 +17,8 @@ void fenrich_cpp::readSignificantQTL(string fnom){
     while(getline(fd, buffer)){
         qtl_count++;
         linecount++;
-        qtl_id.push_back(buffer);
+        //qtl_id.push_back(buffer);
+        nomQTL.insert(make_pair(buffer,0));
 }   
     qtl_count = linecount;
     cout << "Read " << to_string(qtl_count) << " significant QTLs." << endl;
