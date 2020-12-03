@@ -31,8 +31,8 @@ public:
     vector < float > null_maf;
     vector < int > upstream_distance;
     vector < int > downstream_distance; 
-
-
+    unordered_map<string,float> map_maf;
+    vector < unsigned int > nominal;
     // READ DATA 
     void readQTL(string);
     void readNull(string);

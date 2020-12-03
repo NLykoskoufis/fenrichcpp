@@ -5,6 +5,7 @@ using namespace std;
 
 
 void analysis_cpp::readNull(string fnull){
+    
     input_file fd (fnull);
     unsigned int linecount =0;
 
@@ -12,11 +13,11 @@ void analysis_cpp::readNull(string fnull){
     vector < string > header;
     string buffer;
     getline(fd, buffer);
-    boost::split(header, buffer, boost::is_any_of(" "));
-    if(!header[0].compare("#chr")){
+    boost::split(header, buffer, boost::is_any_of("\t"));
+    /*if(!header[0].compare("#chr")){
         cout << "There is a problem with the header.Either it does not exist or it is wrong. " << endl;
         exit(-1);
-    }
+    }*/
     
     
     // Read Null 
@@ -27,10 +28,13 @@ void analysis_cpp::readNull(string fnull){
         null_count++;
 
         boost::split(line, buffer, boost::is_any_of("\t"));
-        null_id.push_back(line[0]);
-        null_maf.push_back(stof(line[5]));
-        upstream_distance.push_back(stoi(line[6]));
-        downstream_distance.push_back(stoi(line[8]));
-    }   
+        null_id.push_back(line[3]);
+        nominal.push_back(stoi(line[5]));
+        null_maf.push_back(stof(line[6]));
+        upstream_distance.push_back(stoi(line[7]));
+        downstream_distance.push_back(stoi(line[9]));
+        map_maf.insert(make_pair(line[3],stof(line[6]))); // Create dictionary with SNP::MAF
 
+    }   
+    cout << "Read " << to_string(linecount) << " null variants." << endl;
 }

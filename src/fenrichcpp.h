@@ -12,6 +12,7 @@
 #include <cmath>
 #include <map> 
 #include <iterator>
+#include <unordered_map>
 
 //INCLUDE BOOST LIBRARIES
 #include <boost/algorithm/string.hpp>
@@ -58,7 +59,7 @@ public:
 
     // NOMINAL QTL 
     int qtl_count;
-    map<string,unsigned int> nomQTL;
+    unordered_map<string,unsigned int> nomQTL;
 
 
     // MANAGEMENT 

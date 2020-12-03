@@ -62,13 +62,13 @@ void fenrich_cpp::fenrichcpp_createTEnull(string fout){
                 }
             }
         }
-
+        // "#chr start end id n_var_in_cis nominalQTL MAF upstream_distance downstream_distance upstream_phen downstream_phen"
         if(n_var_down == 0 && n_var_up == 0){
             fdo << genotype_chr[t] << "\t" << to_string(genotype_start[t]) << "\t" << to_string(genotype_end[t]) << "\t" << genotype_id[t] << "\t" << to_string(var_in_cis) << "\t" << to_string(nom) << "\t" << to_string(MAF) << "\t" << "NA" << "\t" << "NA" << "\t" << "NA" << "\t" << "NA" << endl;
         }else if(n_var_down != 0 && n_var_up == 0){
-            fdo << genotype_chr[t] << "\t" << to_string(genotype_start[t]) << "\t" << to_string(genotype_end[t]) << "\t" << genotype_id[t] << "\t" << to_string(var_in_cis) << "\t" << to_string(nom) << "\t" << to_string(MAF) << "\t" << to_string(upstream_distance) << "\t" << upstream_phenotype << "\t" << "NA" << "\t" << "NA" << endl;
+            fdo << genotype_chr[t] << "\t" << to_string(genotype_start[t]) << "\t" << to_string(genotype_end[t]) << "\t" << genotype_id[t] << "\t" << to_string(var_in_cis) << "\t" << to_string(nom) << "\t" << to_string(MAF) << "\t" << "NA" << "\t" << "NA" << "\t" << to_string(downstream_distance) << "\t" << downstream_phenotype << endl;
         }else if(n_var_down == 0 && n_var_up != 0){
-            fdo << genotype_chr[t] << "\t" << to_string(genotype_start[t]) << "\t" << to_string(genotype_end[t]) << "\t" << genotype_id[t] << "\t" << to_string(var_in_cis) << "\t" << to_string(nom) << "\t" << to_string(MAF) << "\t" << "NA" << "\t" << "NA" << "\t" << to_string(downstream_distance) << "\t" << downstream_phenotype << "\t" << endl;
+            fdo << genotype_chr[t] << "\t" << to_string(genotype_start[t]) << "\t" << to_string(genotype_end[t]) << "\t" << genotype_id[t] << "\t" << to_string(var_in_cis) << "\t" << to_string(nom) << "\t" << to_string(MAF) << "\t" << to_string(upstream_distance) << "\t" << upstream_phenotype << "\t" << "NA" << "\t" << "NA" << "\t" << endl;
         }else{
             fdo << genotype_chr[t] << "\t" << to_string(genotype_start[t]) << "\t" << to_string(genotype_end[t]) << "\t" << genotype_id[t] << "\t" << to_string(var_in_cis) << "\t" << to_string(nom) << "\t" << to_string(MAF) << "\t" << to_string(upstream_distance) << "\t" << upstream_phenotype << "\t" << to_string(downstream_distance) << "\t" << downstream_phenotype << "\t" << endl;
         }
