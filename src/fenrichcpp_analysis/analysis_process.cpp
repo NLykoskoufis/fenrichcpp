@@ -60,7 +60,7 @@ void analysis_cpp::createNullDistribution(){
             //cout << toRandomPeak.size() << endl;*/
         }else{
             cout << toRandomPeak.size() << endl;
-            shuffle(toRandomPeak.begin(), toRandomPeak.end(), default_random_engine(seed));
+            std::shuffle(toRandomPeak.begin(), toRandomPeak.end(), std::default_random_engine(seed));
             if(toRandomPeak.size() >= 10){
                 for(int i=0; i < 10; i++) nulldistribution.push_back(toRandomPeak[i]);
             }else{

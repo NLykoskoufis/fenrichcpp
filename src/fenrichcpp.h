@@ -13,6 +13,10 @@
 #include <map> 
 #include <iterator>
 #include <unordered_map>
+#include <limits>
+#include <set> 
+#include <algorithm>
+#include <random> 
 
 //INCLUDE BOOST LIBRARIES
 #include <boost/algorithm/string.hpp>
