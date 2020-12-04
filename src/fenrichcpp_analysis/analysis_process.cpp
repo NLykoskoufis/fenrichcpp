@@ -82,7 +82,7 @@ void analysis_cpp::functionalEnrichment(string fout){
         Then perform fisher test (need to code this one (: )
         */
     output_file fdo (fout);
-    fdo << "A\tB\tC\tD\tOddsRatio\tpvalue\n" << endl;
+    fdo << "A\tB\tC\tD\tOddsRatio\tpvalue" << endl;
 
     int qtl_overlap = 0;
     int qtl_no_overlap =0;
