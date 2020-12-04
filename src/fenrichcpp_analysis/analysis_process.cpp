@@ -81,6 +81,9 @@ void analysis_cpp::functionalEnrichment(string fout){
 
         Then perform fisher test (need to code this one (: )
         */
+    output_file fdo (fout);
+    fdo << "A\tB\tC\tD\tOddsRatio\tpvalue\n" << endl;
+
     int qtl_overlap = 0;
     int qtl_no_overlap =0;
     int null_overlap = 0;
@@ -114,4 +117,6 @@ void analysis_cpp::functionalEnrichment(string fout){
     cout << "qtl overlap: " << qtl_overlap << "\nqtl no overlap: " << qtl_no_overlap << "\nnull_overlap: " << null_overlap << "\nnull_no_overlap: " << null_no_overlap << endl;
     cout << fisher_test(qtl_overlap,null_overlap, qtl_no_overlap,null_no_overlap) << endl;
     cout << odds_ratio(qtl_overlap,null_overlap, qtl_no_overlap,null_no_overlap) << endl;
+
+    fdo << to_string(qtl_overlap) << "\t" << to_string(null_overlap) << "\t" << to_string(qtl_no_overlap) << "\t" << to_string(null_no_overlap) << "\t" << to_string(odds_ratio(qtl_overlap,null_overlap, qtl_no_overlap,null_no_overlap)) << "\t" << to_string(fisher_test(qtl_overlap,null_overlap, qtl_no_overlap,null_no_overlap)) << endl;
 }
