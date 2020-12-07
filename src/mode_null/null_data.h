@@ -3,7 +3,7 @@
 #define _FENRICH_CPP_H
 
 
-#include "compression_io.h"
+#include "../../lib/compression_io.h"
 
 //INCLUDE STANDARD TEMPLATE LIBRARY USEFULL STUFFS (STL)
 #include <vector>
@@ -83,7 +83,17 @@ public:
     float getMedian(vector<float>);
     float getMean(vector <float>);
     float getMAF(vector <float>);
+
+    // OPTIONS 
+    boost::program_options::options_description option_descriptions;
+	boost::program_options::variables_map options;
+
 };
+
+//***************************************************************//
+//******************** DECLARE FUNCTIONS *************************//
+//***************************************************************//
+void null_main(vector < string > &);
 
 
 //***************************************************************//

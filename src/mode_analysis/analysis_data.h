@@ -1,11 +1,13 @@
 #ifndef _ANALYSIS_H
 #define _ANALYSIS_H
 
-#include "../fenrichcpp.h"
+#include "../mode_null/null_data.h"
+
 #include <boost/math/distributions/hypergeometric.hpp>
 
 using namespace std;
 using namespace boost::math;
+
 class analysis_cpp {
 public:
 
@@ -61,7 +63,18 @@ public:
     double fisher_test(unsigned, unsigned, unsigned, unsigned);
     double odds_ratio(unsigned, unsigned, unsigned, unsigned);
     int findSNP(vector<string>,string);
+
+    // OPTIONS 
+    boost::program_options::options_description option_descriptions;
+	boost::program_options::variables_map options;
 };
+
+//***************************************************************//
+//******************** DECLARE FUNCTIONS *************************//
+//***************************************************************//
+void analysis_main(vector < string > & argv);
+
+
 
 //***************************************************************//
 //******************** INLINE FUNCTIONS *************************//

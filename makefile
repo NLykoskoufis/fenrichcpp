@@ -31,11 +31,13 @@ CXXFLAG_WRN=-Wall -Wextra -Wno-sign-compare -Wno-unused-local-typedefs -Wno-depr
 LIB_FLAGS=-lz -lgsl -lbz2 -llzma -lgslcblas -lm -lpthread -lcurl 
 
 #FILE LISTS 
-BFILE=bin/fenrichcpp
-#OFILE=obj/fenrichcpp.o 
-#OFILE=$(shell find src -name *.cpp | LC_ALL=C sort)
-#HFILE=$(shell find src -name *.h)
-OFILE=src/*.cpp 
+BFILE=bin/fenrich
+HFILE=$(shell find src -name *.h)
+TFILE=$(shell find lib -name *.h)
+OFILE=$(shell for file in `find src -name *.cpp | LC_ALL=C sort`; do echo obj/$$(basename $$file .cpp).o; done)
+VPATH=$(shell for file in `find src -name *.cpp | LC_ALL=C sort`; do echo $$(dirname $$file); done)
+
+
 
 #STATICLY LINKED LIBS
 LIB_FILES=$(HTSLD_LIB)/libhts.a $(BOOST_LIB)/libboost_iostreams.a $(BOOST_LIB)/libboost_program_options.a
@@ -114,3 +116,22 @@ install:
 #COMPILATION RULES 
 $(BFILE):$(OFILE)
 	$(CXX) $^ $(LIB_FILES) -o $@ $(LIB_FLAGS) $(LDFLAG) $(IFLAG)
+
+obj/fenrich.o: src/fenrich.cpp $(HFILE) $(TFILE) $(CFILE)
+	$(CXX) -o $@ -c $< ${CXXFLAG} $(IFLAG)
+
+obj/null_%.o: null_%.cpp null_data.h $(TFILE)
+	$(CXX) -o $@ -c $< ${CXXFLAG} $(IFLAG)
+
+obj/analysis_%.o: analysis_%.cpp analysis_data.h  $(TFILE)
+	$(CXX) -o $@ -c $< ${CXXFLAG} $(IFLAG)
+
+
+clean:
+	rm -f obj/*.o $(BFILE)
+
+clean-null:
+	rm -f obj/*.o $(BFILE)
+
+clean-analysis:
+	rm -f obj/*.o $(BFILE)

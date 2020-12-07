@@ -1,6 +1,6 @@
 
 
-#include "fenrichcpp.h"
+#include "null_data.h"
 
 using namespace std;
 
@@ -74,8 +74,8 @@ void fenrich_cpp::fenrichcpp_createTEnull(string fout){
         }
     }
 }
-
-int  main(int argc, char** argv){
+/*
+int null_main(int argc, char** argv){
 
     boost::program_options::options_description options ("Allowed options");
     options.add_options()
@@ -128,4 +128,50 @@ int  main(int argc, char** argv){
     }
 
     return 0;
+}
+*/
+void null_main(vector < string > & argv) {
+	fenrich_cpp D;
+
+    boost::program_options::options_description opt_basic ("\x1B[32mBasics\33[0m");
+	opt_basic.add_options()
+		("help", "Produces option description")
+		("seed", boost::program_options::value< unsigned int >()->default_value(123456), "Random number seed. Useful to replicate runs.");
+
+    boost::program_options::options_description opt_files ("\x1B[32mI/O\33[0m");
+	opt_files.add_options()
+		("vcf", boost::program_options::value< string >(), "Genotypes in VCF/BCF format.")
+		("bed", boost::program_options::value< string >(), "Phenotypes in BED format.")
+		("qtl", boost::program_options::value< string >(), "QTLs in QTLtools format.")
+		("out", boost::program_options::value< string >(), "Output file.");
+
+
+    D.option_descriptions.add(opt_basic).add(opt_files);
+
+    //-------------------
+	// 2. PARSE OPTIONS
+	//-------------------
+	try {
+		boost::program_options::store(boost::program_options::command_line_parser(argv).options(D.option_descriptions).run(), D.options);
+		boost::program_options::notify(D.options);
+	} catch ( const boost::program_options::error& e ) {
+		cerr << "Error parsing [null] command line :" << string(e.what()) << endl;
+		exit(0);
+	}
+    
+    cout << "Generating null file.";
+    if(D.options.count("help")) {
+        cout << D.option_descriptions << endl;
+        exit(0);
+    }
+
+    if (D.options.count("bed") && D.options.count("vcf") && D.options.count("out") && D.options.count("qt")){
+        D.readPhenotypes(D.options["bed"].as<string>()); // GENES 
+        D.readSignificantQTL(D.options["qtl"].as<string>()); // Read nominal QTLs
+        D.readGenotypes(D.options["vcf"].as<string>()); // TES
+        D.fenrichcpp_createTEnull(D.options["out"].as<string>()); // Run analysis
+    }
+
+
+
 }
