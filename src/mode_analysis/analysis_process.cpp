@@ -103,17 +103,10 @@ void analysis_cpp::functionalEnrichment(string fout){
             null_no_overlap++;
         }
     }
-    /*for(int i=0; i < intersection_snp.size(); i++){
-        if(find(qtl_id.begin(), qtl_id.end(),intersection_snp[i]) != qtl_id.end()){
-            qtl_overlap++;
-        }
-        if(find(nulldistribution.begin(),nulldistribution.end(), intersection_snp[i]) != nulldistribution.end()){
-            null_overlap++;
-        }
+    if (qtl_overlap == 0 || null_overlap == 0) {
+        qtl_overlap = qtl_overlap + 1;
+        null_overlap = null_overlap + 1;
     }
-    qtl_no_overlap = qtl_count - qtl_overlap;
-    null_no_overlap = nulldistribution.size() - null_overlap;
-    */
     cout << "qtl overlap: " << qtl_overlap << "\nqtl no overlap: " << qtl_no_overlap << "\nnull_overlap: " << null_overlap << "\nnull_no_overlap: " << null_no_overlap << endl;
     cout << fisher_test(qtl_overlap,null_overlap, qtl_no_overlap,null_no_overlap) << endl;
     cout << odds_ratio(qtl_overlap,null_overlap, qtl_no_overlap,null_no_overlap) << endl;
