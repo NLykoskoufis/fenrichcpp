@@ -99,7 +99,16 @@ void analysis_main(vector < string > & argv) {
         exit(0);
     }
 
-    if (D.options.count("phen") && D.options.count("vcf") && D.options.count("out") && D.options.count("qtl")){
+    if (D.options.count("phen") && D.options.count("null") && D.options.count("out") && D.options.count("qtl")){
+        D.random_variants = D.options["random_var"].as < unsigned int >();
+        D.window_size = D.options["window_size"].as < unsigned int >();
+        D.window_maf = D.options["maf_window"].as < float >();
+
+        cout << "performing functional enrichment" << endl;
+        cout << " * Random variants: " << D.random_variants << endl;
+        cout << " * Window size    :" << D.window_size << endl;
+        cout << " * MAF window     :" << D.window_maf << endl;
+
         D.readNull(D.options["null"].as<string>()); 
         D.readIntersection(D.options["phen"].as<string>()); 
         D.readQTL(D.options["qtl"].as<string>()); 

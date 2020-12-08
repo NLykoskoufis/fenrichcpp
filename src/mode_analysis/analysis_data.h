@@ -12,9 +12,9 @@ class analysis_cpp {
 public:
 
     // ANALYSIS VARIABLES // 
-    int window_size=2500;
-    float window_maf=0.01;
-    int random_variants=10;
+    unsigned int window_size;
+    float window_maf;
+    unsigned int random_variants;
 
     // QTL 
     int qtl_count;

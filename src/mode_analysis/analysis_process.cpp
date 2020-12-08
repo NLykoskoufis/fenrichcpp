@@ -113,3 +113,4 @@ void analysis_cpp::functionalEnrichment(string fout){
 
     fdo << to_string(qtl_overlap) << "\t" << to_string(null_overlap) << "\t" << to_string(qtl_no_overlap) << "\t" << to_string(null_no_overlap) << "\t" << to_string(odds_ratio(qtl_overlap,null_overlap, qtl_no_overlap,null_no_overlap)) << "\t" << to_string(fisher_test(qtl_overlap,null_overlap, qtl_no_overlap,null_no_overlap)) << endl;
 }
+
