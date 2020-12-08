@@ -5,7 +5,6 @@ using namespace std;
 
 
 void analysis_cpp::readQTL(string fqtl){
-
     input_file fd (fqtl);
     unsigned int linecount =0;
 

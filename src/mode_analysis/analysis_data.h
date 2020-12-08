@@ -50,6 +50,7 @@ public:
     vector < string > intersection_snp;
     vector < string > intersection_peaks;
 
+    
 
     // READ DATA 
     void readQTL(string);

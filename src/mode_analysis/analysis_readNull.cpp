@@ -5,7 +5,6 @@ using namespace std;
 
 
 void analysis_cpp::readNull(string fnull){
-    
     input_file fd (fnull);
     unsigned int linecount =0;
 

@@ -69,10 +69,7 @@ public:
     // MANAGEMENT 
     void fenrichcpp_createTEnull(string);
 
-    // CONSTRUCTOR / DESTRUCTOR 
-    //fenrich_cpp();
-    //~fenrich_cpp();
-    //void clear();
+    
 
     // READ DATA 
     void readPhenotypes(string);

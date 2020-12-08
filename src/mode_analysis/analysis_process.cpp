@@ -15,7 +15,7 @@ void analysis_cpp::createNullDistribution(){
 
    for(int i=0; i<qtl_count; i++){
        vector < string > toRandomPeak;
-       cout << "Processed " << i+1 << " eQTLs." << endl;
+       //cout << "Processed " << i+1 << " eQTLs." << endl;
        for(int s=0; s < null_count; s++){
            // Check whether eQTL dist and MAF windows are matching with any TEs. 
            // If they do not match, through message
@@ -59,7 +59,7 @@ void analysis_cpp::createNullDistribution(){
             }
             //cout << toRandomPeak.size() << endl;*/
         }else{
-            cout << toRandomPeak.size() << endl;
+            //cout << toRandomPeak.size() << endl;
             std::shuffle(toRandomPeak.begin(), toRandomPeak.end(), std::default_random_engine(seed));
             if(toRandomPeak.size() >= 10){
                 for(int i=0; i < 10; i++) nulldistribution.push_back(toRandomPeak[i]);
@@ -67,7 +67,7 @@ void analysis_cpp::createNullDistribution(){
                 for(int i=0; i < toRandomPeak.size(); i++) nulldistribution.push_back(toRandomPeak[i]);
                 below_random_threshold++;
             }
-            cout << nulldistribution.size() << endl;
+            //cout << nulldistribution.size() << endl;
         }
     } // QTL for loop 
 }
