@@ -5,7 +5,7 @@ using namespace std;
 void analysis_cpp::readIntersection(string finter){
 
     input_file fd (finter);
-    unsigned int linecount;
+    unsigned int linecount=0;
 
     // Read Data 
     vector < string > line;
@@ -27,4 +27,5 @@ void analysis_cpp::readIntersection(string finter){
        cout << x << ","; 
     }
     cout << "] peaks." << endl;
+    intersection_count = linecount;
 }
