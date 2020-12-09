@@ -15,23 +15,21 @@ void analysis_cpp::createNullDistribution(){
 
    for(int i=0; i<qtl_count; i++){
        vector < string > toRandomPeak;
-       //cout << "Processed " << i+1 << " eQTLs." << endl;
+       cout << "Processed " << i+1 << " eQTLs." << endl;
        for(int s=0; s < null_count; s++){
            // Check whether eQTL dist and MAF windows are matching with any TEs. 
            // If they do not match, through message
            
            if(qtl_dist_phe_var[i] > 0){
-               if(downstream_distance[s].compare("NA") != 0){
-               if(qtl_dist_phe_var_from[i] <= stoi(downstream_distance[s]) && qtl_dist_phe_var_to[i]>= stoi(downstream_distance[s])){
+               if(qtl_dist_phe_var_from[i] <= downstream_distance[s] && qtl_dist_phe_var_to[i]>= downstream_distance[s] && downstream_distance[s] >0){
                    if(qtl_maf_from[i] <= null_maf[s] && qtl_maf_to[i] >= null_maf[s]){
                        if(nominal[s] != 1 && find(nulldistribution.begin(),nulldistribution.end(), null_id[s]) == nulldistribution.end()){
                            toRandomPeak.push_back(null_id[s]);
                        }
                    }
                }
-           }}else{
-               if(upstream_distance[s].compare("NA") != 0){
-               if(qtl_dist_phe_var_from[i] <= stoi(upstream_distance[s]) && qtl_dist_phe_var_to[i]>= stoi(upstream_distance[s])) {
+           }else{
+               if(qtl_dist_phe_var_from[i] <= upstream_distance[s] && qtl_dist_phe_var_to[i]>= upstream_distance[s] && upstream_distance[s] < 0){
                     if(qtl_maf_from[i] <= null_maf[s] && qtl_maf_to[i] >= null_maf[s]){
                         if(nominal[s] != 1 && find(nulldistribution.begin(),nulldistribution.end(),null_id[s]) == nulldistribution.end()){
                             toRandomPeak.push_back(null_id[s]);
@@ -39,7 +37,6 @@ void analysis_cpp::createNullDistribution(){
                     }
                 }
             }
-           }
         }// NULL for loop
         if(toRandomPeak.size() == 0){
             cout << "No variants found" << endl;

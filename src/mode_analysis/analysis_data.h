@@ -31,8 +31,8 @@ public:
     int null_count;
     vector < string > null_id;
     vector < float > null_maf;
-    vector < string > upstream_distance;
-    vector < string > downstream_distance; 
+    vector < int > upstream_distance;
+    vector < int > downstream_distance; 
     unordered_map <string, float> map_maf;
     vector < unsigned int > nominal;
 

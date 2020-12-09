@@ -28,10 +28,10 @@ void analysis_cpp::readNull(string fnull){
         null_id.push_back(line[3]);
         nominal.push_back(stoi(line[5]));
         null_maf.push_back(stof(line[6]));
-        //if(line[7].find("NA") != string::npos) upstream_distance.push_back(stoi("1"));
-        upstream_distance.push_back(line[7]);
-        //if(line[9].find("NA") != string::npos) downstream_distance.push_back(stoi("-1"));
-        downstream_distance.push_back(line[9]);
+        if(line[7].find("NA") != string::npos) upstream_distance.push_back(stoi("1"));
+        else upstream_distance.push_back(stoi(line[7]));
+        if(line[9].find("NA") != string::npos) downstream_distance.push_back(stoi("-1"));
+        else downstream_distance.push_back(stoi(line[9]));
         //cout << line[3] << endl;
         map_maf.insert(make_pair(line[3],stof(line[6]))); // Create dictionary with SNP::MAF
 
