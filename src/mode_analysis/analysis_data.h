@@ -81,6 +81,8 @@ void analysis_main(vector < string > & argv);
 //******************** INLINE FUNCTIONS *************************//
 //***************************************************************//
 
+
+
 inline int analysis_cpp::findSNP(vector < string > vec,string snp){
 
     vector<string>::iterator itr = find(vec.begin(), vec.end(), snp);

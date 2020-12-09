@@ -17,6 +17,7 @@
 #include <set> 
 #include <algorithm>
 #include <random> 
+#include <iomanip>
 
 //INCLUDE BOOST LIBRARIES
 #include <boost/algorithm/string.hpp>
