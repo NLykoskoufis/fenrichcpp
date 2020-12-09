@@ -108,7 +108,7 @@ void analysis_cpp::functionalEnrichment(string fout){
         null_overlap = null_overlap + 1;
     }
     double fisher = fisher_test(qtl_overlap,null_overlap, qtl_no_overlap,null_no_overlap);
-    double odssratio = odds_ratio(qtl_overlap,null_overlap, qtl_no_overlap,null_no_overlap);
+    double oddsratio = odds_ratio(qtl_overlap,null_overlap, qtl_no_overlap,null_no_overlap);
 
     cout << "qtl overlap: " << qtl_overlap << "\nqtl no overlap: " << qtl_no_overlap << "\nnull_overlap: " << null_overlap << "\nnull_no_overlap: " << null_no_overlap << endl;
     cout << fisher << endl;
