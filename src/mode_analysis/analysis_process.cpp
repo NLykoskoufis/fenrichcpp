@@ -31,7 +31,7 @@ void analysis_cpp::createNullDistribution(){
                }
            }}else{
                if(upstream_distance[s].compare("NA") != 0){
-               if(qtl_dist_phe_var_from[i] <= stoi(upstream_distance[s]) && qtl_dist_phe_var_to[i]>= stoi(upstream_distance[s]) {
+               if(qtl_dist_phe_var_from[i] <= stoi(upstream_distance[s]) && qtl_dist_phe_var_to[i]>= stoi(upstream_distance[s])) {
                     if(qtl_maf_from[i] <= null_maf[s] && qtl_maf_to[i] >= null_maf[s]){
                         if(nominal[s] != 1 && find(nulldistribution.begin(),nulldistribution.end(),null_id[s]) == nulldistribution.end()){
                             toRandomPeak.push_back(null_id[s]);
