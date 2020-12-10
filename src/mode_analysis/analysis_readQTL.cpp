@@ -7,7 +7,7 @@ using namespace std;
 void analysis_cpp::readQTL(string fqtl){
     input_file fd (fqtl);
     unsigned int linecount =0;
-
+    qtl_count = 0;
     //read header 
     vector < string > header;
     string buffer;
@@ -21,12 +21,15 @@ void analysis_cpp::readQTL(string fqtl){
     // It can be nominal, permutation, independent. The last columns will change
     
     // Read QTL information
-    vector < string > line; 
+    vector < string > line;
     while(getline(fd, buffer)){
         if (linecount % 1000 == 0) cout << "Read " << to_string(linecount) << " lines" << endl;
         linecount++;
-       
         boost::split(line, buffer, boost::is_any_of(" ")); // Split line
+        if (find(qtl_id.begin(), qtl_id.end(), line[7]) != qtl_id.end()) continue; // Check whether the eQTL SNP has already been inserted 
+        qtl_count++;
+        
+
         qtl_id.push_back(line[7]);
         qtl_dist_phe_var.push_back(stoi(line[6]));
         
@@ -59,6 +62,6 @@ void analysis_cpp::readQTL(string fqtl){
     
         qtl_phe_strand.push_back(line[4]);
     }
-    qtl_count = linecount;
-    cout << "Read " << qtl_count << endl;
+
+    cout << "Read " << linecount << endl;
 }
