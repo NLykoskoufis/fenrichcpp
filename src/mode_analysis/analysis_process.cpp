@@ -2,15 +2,6 @@
 
 using namespace std;
 
-
-
-
-
-
-
-
-
-
 void analysis_cpp::createNullDistribution(){
 
     /*
@@ -22,7 +13,7 @@ void analysis_cpp::createNullDistribution(){
     When the null distribution of SNPs are done, then we can perform the functional enrichment. 
     */
 
-   for(int i=0; i<qtl_count; i++){
+   for(int i=0; i<qtl_id.size(); i++){
        vector < string > toRandomPeak;
        cout << "Processed " << i+1 << " eQTLs." << endl;
        for(int s=0; s < null_count; s++){
@@ -97,7 +88,7 @@ void analysis_cpp::functionalEnrichment(string fout){
     int qtl_no_overlap =0;
     int null_overlap = 0;
     int null_no_overlap=0;
-    for(int i=0; i < qtl_count; i++){
+    for(int i=0; i < qtl_id.size(); i++){
         if(find(intersection_snp.begin(),intersection_snp.end(), qtl_id[i]) != intersection_snp.end()){
             qtl_overlap++;
         }else{
