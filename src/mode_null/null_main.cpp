@@ -25,7 +25,7 @@ void fenrich_cpp::fenrichcpp_createTEnull(string fout){
         string downstream_phenotype;
         string upstream_phenotype;
         int dTSS;
-        float MAF = getMAF(genotype_val[t]);
+        double MAF = getMAF(genotype_val[t]);
         unsigned int nom; 
         if(nomQTL.find(genotype_id[t]) != nomQTL.end()) nom =1;
         else nom = 0;

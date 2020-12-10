@@ -12,13 +12,13 @@ class analysis_cpp {
 public:
 
     // ANALYSIS VARIABLES // 
-    unsigned int window_size;
+    int window_size;
     float window_maf;
-    unsigned int random_variants;
+    int random_variants;
 
     // QTL 
     int qtl_count;
-    vector < string > qtl_id;
+    vector < string >  qtl_id;
     vector < int > qtl_dist_phe_var;
     vector < string > qtl_phe_strand;
     vector < int > qtl_dist_phe_var_from;
@@ -26,6 +26,9 @@ public:
     vector < float > qtl_maf;
     vector < float > qtl_maf_from;
     vector < float > qtl_maf_to;
+    
+    unordered_map < string, int > qtl_map;
+
 
     // NULL
     int null_count;
@@ -60,6 +63,7 @@ public:
     // PROCESS
     void createNullDistribution();
     void functionalEnrichment(string);
+    void filterQTL();
     // INLINE FUNCTIONS FOR PERFORMANCE
     double fisher_test(unsigned, unsigned, unsigned, unsigned);
     double odds_ratio(unsigned, unsigned, unsigned, unsigned);
