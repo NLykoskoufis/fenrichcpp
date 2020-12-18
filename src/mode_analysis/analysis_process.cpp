@@ -12,7 +12,7 @@ void analysis_cpp::createNullDistribution(){
 
     When the null distribution of SNPs are done, then we can perform the functional enrichment. 
     */
-
+   output_file fdo ("null_distribution_used.txt");
    for(int i=0; i<qtl_id.size(); i++){
        vector < string > toRandomPeak;
        cout << "Processed " << i+1 << " eQTLs." << endl;
@@ -26,7 +26,7 @@ void analysis_cpp::createNullDistribution(){
                        if(nominal[s] != 1 && find(nulldistribution.begin(),nulldistribution.end(), null_id[s]) == nulldistribution.end()){
                            toRandomPeak.push_back(null_id[s]);
                        }
-                   }
+                   } 
                }
            }else{
                if(qtl_dist_phe_var_from[i] <= upstream_distance[s] && qtl_dist_phe_var_to[i]>= upstream_distance[s]){
@@ -62,14 +62,26 @@ void analysis_cpp::createNullDistribution(){
             //cout << toRandomPeak.size() << endl;
             std::shuffle(toRandomPeak.begin(), toRandomPeak.end(), std::default_random_engine(seed));
             if(toRandomPeak.size() >= 10){
-                for(int i=0; i < 10; i++) nulldistribution.push_back(toRandomPeak[i]);
+                fdo << qtl_id[i] << "\t";
+                for(int r=0; r < 10; r++){
+                    nulldistribution.push_back(toRandomPeak[r]);
+                    fdo << toRandomPeak[r] << " ";
+
+                }
+                fdo << endl;
             }else{
-                for(int i=0; i < toRandomPeak.size(); i++) nulldistribution.push_back(toRandomPeak[i]);
-                below_random_threshold++;
+                fdo << qtl_id[i] << "\t";
+                for(int r=0; r < toRandomPeak.size(); r++){
+                    nulldistribution.push_back(toRandomPeak[r]);
+                    fdo << toRandomPeak[r] << " ";
+                    below_random_threshold++;
+                }
+                fdo << endl;
             }
             //cout << nulldistribution.size() << endl;
         }
-    } // QTL for loop 
+    } // QTL for loop
+
 }
 
 void analysis_cpp::functionalEnrichment(string fout){

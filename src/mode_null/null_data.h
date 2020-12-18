@@ -4,6 +4,7 @@
 
 
 #include "../../lib/compression_io.h"
+#include "../../lib/verbose.h"
 
 //INCLUDE STANDARD TEMPLATE LIBRARY USEFULL STUFFS (STL)
 #include <vector>
@@ -38,9 +39,8 @@ using namespace std;
 
 class fenrich_cpp {
 public:
-    // REGIONS 
-    string regionPhenotype_chr = "NA";
-    string regionPhenotype;
+    
+    string genomic_region;
 
     // PHENOTYPES 
     int phenotype_count;
@@ -66,6 +66,10 @@ public:
     int qtl_count;
     unordered_map<string,unsigned int> nomQTL;
 
+    //DATA REGION
+	bool setPhenotypeRegion(string);
+	bool setGenotypeRegion(string);
+	void setPhenotypeRegion(int, int);
 
     // MANAGEMENT 
     void fenrichcpp_createTEnull(string);

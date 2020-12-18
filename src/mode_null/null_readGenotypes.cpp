@@ -5,7 +5,11 @@ using namespace std;
 
 void fenrich_cpp::readGenotypes(string fvcf){
     // Opening files
-    bcf_srs_t * sr = bcf_sr_init();
+    bcf_srs_t * sr =  bcf_sr_init();
+    if ( genomic_region != "NA"){
+        cout << "target region [" + genomic_region + "]" << endl;
+        if (bcf_sr_set_regions(sr, genomic_region.c_str(), 0) == -1) cout << ("Cannot jump to region!") << endl;
+    }
     if(!(bcf_sr_add_reader (sr, fvcf.c_str()))) {
 		switch (sr->errnum) {
 		case not_bgzf: cout << "File not compressed with bgzip!" << endl; break;

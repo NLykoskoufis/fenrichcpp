@@ -24,13 +24,16 @@ void analysis_cpp::readQTL(string fqtl){
         if (linecount % 1000 == 0) cout << "Read " << to_string(linecount) << " lines" << endl;
         linecount++;
         boost::split(line, buffer, boost::is_any_of(" ")); // Split line
-        if (find(qtl_id.begin(), qtl_id.end(), line[7]) != qtl_id.end()) continue; // Check whether the eQTL SNP has already been inserted 
         qtl_count++;
         
         snp_id.push_back(line[7]);
         dist_phe_var.push_back(stoi(line[6]));
         
-    }
+    } // Finished reading the file. 
+
+    unordered_map<string,unsigned int> qtl_check;
+
+
     cout << "Read " << linecount << endl;
     cout << "Processing QTLs. When multiple SNPs, keeping only the one closest to the gene.";
     int multiple=0;
@@ -83,12 +86,15 @@ void analysis_cpp::readQTL(string fqtl){
                 }
             }
         cout << snp_id[i] << " " << dist << endl;
-        if(find(qtl_id.begin(),qtl_id.end(), snp_id[i]) == qtl_id.end()){
+        if(find(qtl_id.begin(),qtl_id.end(), snp_id[i]) == qtl_id.end()){ // This is going to take more and more time to run because the vector will incrementally increase. I will try with a unordered map and check whether the key is in or not. Might be faster. 
+        //unordered_map<std::string,unsigned int>::iterator ch = qtl_check.find(snp_id[i]);
+        //if(ch == qtl_check.end()){
+        
             qtl_id.push_back(snp_id[i]);
             qtl_dist_phe_var.push_back(dist);
 
             // GET MAF 
-            unordered_map<std::string,float>::iterator got = map_maf.find(snp_id[i]);
+        unordered_map<std::string,float>::iterator got = map_maf.find(snp_id[i]);
             if(got == map_maf.end()){
                 cout << "Problem!!! Could not find SNP. DID you use the same VCF for the creation of the null and the eQTL analysis?" << endl;
             }else{
@@ -120,6 +126,7 @@ void analysis_cpp::readQTL(string fqtl){
     }
     cout << snp_id.size() << " " << qtl_id.size() << endl;
     cout << multiple << endl;
+
     cout << "For debugging purposes, writing to file." << endl;
     output_file fdo ("windows_created.txt");
     fdo << "ID\tdist_phe_var\tMAF\tfrom\tto\tmaf_from\tmaf_to" << endl;
@@ -127,5 +134,6 @@ void analysis_cpp::readQTL(string fqtl){
     {
         fdo << qtl_id[i] << " " << to_string(qtl_dist_phe_var[i]) << " " << to_string(qtl_maf[i]) << " " << to_string(qtl_dist_phe_var_from[i]) << " " << to_string(qtl_dist_phe_var_to[i]) << " " << to_string(qtl_maf_from[i]) << " " << to_string(qtl_maf_to[i]) << endl; 
     }
+
 }
 
