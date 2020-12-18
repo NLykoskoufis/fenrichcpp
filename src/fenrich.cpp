@@ -16,7 +16,7 @@ int main(int argc, char ** argv) {
     cout << "\n" << "\x1B[32;1m" << "Functional enrichment for QTL variants" << "\033[0m" << endl; 
     cout << " * Authors : Nikolaos M.R. LYKOSKOUFIS" << endl;
     cout << " * Contact : nikolaos.lykoskoufis@unige.ch" << endl;
-    cout << " * Version : version 0.1" << endl;
+    cout << " * Version : version 1.0" << endl;
 
     // MODES 
     vector < string > args;
