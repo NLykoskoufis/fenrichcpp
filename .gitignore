@@ -1,4 +1,5 @@
 test
 *.txt.gz 
 *.vcf.gz
+*.txt
 
