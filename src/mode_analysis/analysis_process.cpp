@@ -85,15 +85,16 @@ void analysis_cpp::createNullDistribution(){
                 
                 for(int r=0; r < 10; r++){
                     nulldistribution.push_back(toRandomPeak[r]);
-                    fdo << toRandomPeak[r] << ",";
-
+                    fdo << toRandomPeak[r];
+                    if(r < 10) fdo << ",";
                 }
                 fdo << endl;
             }else{
                 
                 for(int r=0; r < toRandomPeak.size(); r++){
                     nulldistribution.push_back(toRandomPeak[r]);
-                    fdo << toRandomPeak[r] << ",";
+                    fdo << toRandomPeak[r];
+                    if(r < toRandomPeak.size()) fdo << ",";
                     below_random_threshold++;
                 }
                 fdo << endl;
