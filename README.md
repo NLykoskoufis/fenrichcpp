@@ -45,7 +45,7 @@ fenrich null \
 
 In order to speed the process you can also perform this by chromosome
 
-```{bash}
+```{sh}
 fenrich null \
     --vcf <vcf file> \
     --bed <bed file> \
