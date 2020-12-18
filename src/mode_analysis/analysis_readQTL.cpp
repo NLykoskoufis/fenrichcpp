@@ -59,7 +59,8 @@ void analysis_cpp::readQTL(string fqtl){
             string snp = snp_id[i];
             for(int it=0; it < linecount; it++){
                 if(snp.compare(snp_id[it]) == 0){
-                    if(dist < abs(dist_phe_var[it])){
+                    cout << dist_phe_var[it] << endl;
+                    if(abs(dist) < abs(dist_phe_var[it])){
                         continue;
 
                     }else{
