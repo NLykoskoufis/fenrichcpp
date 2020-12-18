@@ -58,7 +58,7 @@ fenrich null \
 
 By default the window size is set to ± 2'500, the maf window to ±2% and the number of random variants to 10. You can always change these parameters if needed.
 
-*IMPORTANT*: the eQTL results should be in QTLtools cis format. Please check QTLtools for the exact format to use.
+**IMPORTANT: the eQTL results should be in QTLtools cis format. Please check QTLtools for the exact format to use.**
 
 
 ```{bash}
