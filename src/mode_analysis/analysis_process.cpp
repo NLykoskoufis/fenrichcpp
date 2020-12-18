@@ -13,24 +13,44 @@ void analysis_cpp::createNullDistribution(){
     When the null distribution of SNPs are done, then we can perform the functional enrichment. 
     */
    output_file fdo ("null_distribution_used.txt");
+   fdo << "qtl_id\tmaf\tdist_phe_var\tmaf_from\tmaf_to\tdist_from\tdist_to\trandom_variants" << endl;
    for(int i=0; i<qtl_id.size(); i++){
-       vector < string > toRandomPeak;
-       cout << "Processed " << i+1 << " eQTLs." << endl;
-       for(int s=0; s < null_count; s++){
+        vector < string > toRandomPeak;
+        cout << "Processed " << i+1 << " eQTLs." << endl;
+        
+        float qtl_maf_from;
+        float qtl_maf_to; 
+        int qtl_dist_phe_var_from;
+        int qtl_dist_phe_var_to;
+
+        qtl_maf_from = qtl_maf[i] - (qtl_maf[i] * window_maf);
+        qtl_maf_to = qtl_maf[i] + (qtl_maf[i] * window_maf);
+
+        if(qtl_dist_phe_var[i] < 0){
+            qtl_dist_phe_var_to = (qtl_dist_phe_var[i] + window_size) > 0 ? 0:(qtl_dist_phe_var[i] + window_size);
+            qtl_dist_phe_var_from = qtl_dist_phe_var[i] - window_size;
+        }else{
+            qtl_dist_phe_var_from = (qtl_dist_phe_var[i] - window_size) < 0 ? 0:(qtl_dist_phe_var[i] - window_size);
+            qtl_dist_phe_var_to = qtl_dist_phe_var[i] + window_size;
+        }
+        // Writing file containing distances and randomly chose variants.
+        fdo << qtl_id[i] << "\t" << to_string(qtl_maf[i]) << "\t" << to_string(qtl_dist_phe_var[i]) << "\t" << to_string(qtl_maf_from) << "\t" << to_string(qtl_maf_to) << "\t" << to_string(qtl_dist_phe_var_from) << "\t" << to_string(qtl_dist_phe_var_to) << "\t";
+
+        for(int s=0; s < null_count; s++){
            // Check whether eQTL dist and MAF windows are matching with any TEs. 
            // If they do not match, through message
            
            if(qtl_dist_phe_var[i] > 0){
-               if(qtl_dist_phe_var_from[i] <= downstream_distance[s] && qtl_dist_phe_var_to[i]>= downstream_distance[s]){
-                   if(qtl_maf_from[i] <= null_maf[s] && qtl_maf_to[i] >= null_maf[s]){
+               if(qtl_dist_phe_var_from <= downstream_distance[s] && qtl_dist_phe_var_to>= downstream_distance[s]){
+                   if(qtl_maf_from <= null_maf[s] && qtl_maf_to >= null_maf[s]){
                        if(nominal[s] != 1 && find(nulldistribution.begin(),nulldistribution.end(), null_id[s]) == nulldistribution.end()){
                            toRandomPeak.push_back(null_id[s]);
                        }
                    } 
                }
            }else{
-               if(qtl_dist_phe_var_from[i] <= upstream_distance[s] && qtl_dist_phe_var_to[i]>= upstream_distance[s]){
-                    if(qtl_maf_from[i] <= null_maf[s] && qtl_maf_to[i] >= null_maf[s]){
+               if(qtl_dist_phe_var_from <= upstream_distance[s] && qtl_dist_phe_var_to>= upstream_distance[s]){
+                    if(qtl_maf_from <= null_maf[s] && qtl_maf_to >= null_maf[s]){
                         if(nominal[s] != 1 && find(nulldistribution.begin(),nulldistribution.end(),null_id[s]) == nulldistribution.end()){
                             toRandomPeak.push_back(null_id[s]);
                         }
@@ -62,18 +82,18 @@ void analysis_cpp::createNullDistribution(){
             //cout << toRandomPeak.size() << endl;
             std::shuffle(toRandomPeak.begin(), toRandomPeak.end(), std::default_random_engine(seed));
             if(toRandomPeak.size() >= 10){
-                fdo << qtl_id[i] << "\t";
+                
                 for(int r=0; r < 10; r++){
                     nulldistribution.push_back(toRandomPeak[r]);
-                    fdo << toRandomPeak[r] << " ";
+                    fdo << toRandomPeak[r] << ",";
 
                 }
                 fdo << endl;
             }else{
-                fdo << qtl_id[i] << "\t";
+                
                 for(int r=0; r < toRandomPeak.size(); r++){
                     nulldistribution.push_back(toRandomPeak[r]);
-                    fdo << toRandomPeak[r] << " ";
+                    fdo << toRandomPeak[r] << ",";
                     below_random_threshold++;
                 }
                 fdo << endl;

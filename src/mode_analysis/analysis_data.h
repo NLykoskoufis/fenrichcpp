@@ -21,11 +21,11 @@ public:
     vector < string >  qtl_id;
     vector < int > qtl_dist_phe_var;
     vector < string > qtl_phe_strand;
-    vector < int > qtl_dist_phe_var_from;
-    vector < int > qtl_dist_phe_var_to;
+    //vector < int > qtl_dist_phe_var_from;
+    //vector < int > qtl_dist_phe_var_to;
     vector < float > qtl_maf;
-    vector < float > qtl_maf_from;
-    vector < float > qtl_maf_to;
+    //vector < float > qtl_maf_from;
+    //vector < float > qtl_maf_to;
     
     unordered_map < string, int > qtl_map;
 
