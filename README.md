@@ -12,7 +12,7 @@ The functional enrichment is performed in two steps. The first step creates a fi
 
 First, we need to overlap our variants with the ChIP-seq data we want to perform enrichment.
 
-```{bash}
+```bash
 bedtools intersect -a variants.bed.gz -b ChIP_seq_data.bed.gz -wa -wb > overlaped_elements.txt
 ```
 The output file should look like this
@@ -31,11 +31,11 @@ The output file should look like this
 
 Before creating the null file you also need to provide a list of variants that are nominally significant eQTLs. These can be provide by using QTLtoos cis --nominal 1. Then you need to only keep the significant snps, like so
 
-```{bash}
+```bash
 zcat nominal1_chrALL.txt.gz | awk '{if($12 <0.05) {print $8}}' > nominal_only_significant_snps.txt
 ```
 
-```{bash}
+```bash
 fenrich null \
     --vcf <vcf file> \
     --bed <bed file> \
@@ -45,7 +45,7 @@ fenrich null \
 
 In order to speed the process you can also perform this by chromosome
 
-```{sh}
+```bash
 fenrich null \
     --vcf <vcf file> \
     --bed <bed file> \
@@ -61,7 +61,7 @@ By default the window size is set to ± 2'500, the maf window to ±2% and the nu
 **IMPORTANT: the eQTL results should be in QTLtools cis format. Please check QTLtools for the exact format to use.**
 
 
-```{bash}
+```bash
 fenrich enrich \
     --nul <null file > \
     --qtl <qtls to be enriched> \
