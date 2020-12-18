@@ -4,7 +4,6 @@
 
 
 #include "../../lib/compression_io.h"
-#include "../../lib/verbose.h"
 
 //INCLUDE STANDARD TEMPLATE LIBRARY USEFULL STUFFS (STL)
 #include <vector>
@@ -73,8 +72,6 @@ public:
 
     // MANAGEMENT 
     void fenrichcpp_createTEnull(string);
-
-    
 
     // READ DATA 
     void readPhenotypes(string);

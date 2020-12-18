@@ -93,7 +93,7 @@ void analysis_main(vector < string > & argv) {
 		exit(0);
 	}
 
-    cout << "Performing functional enrichment.";
+    std::cout << "\n" << "\x1B[32;1m" << "FUNCTIONAL ENRICHMENT ANALYSIS" << "\033[0m" << endl;
     if(D.options.count("help")) {
         cout << D.option_descriptions << endl;
         exit(0);

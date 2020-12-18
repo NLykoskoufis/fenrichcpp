@@ -18,6 +18,8 @@ void analysis_cpp::createNullDistribution(){
         vector < string > toRandomPeak;
         cout << "Processed " << i+1 << " eQTLs." << endl;
         
+        // GET UPSTREAM AND DOWNSTREAM 
+            // If d > 0 --> Downstream and if from is smaller than 0 meaning that bin is tresspassing into upstream territory, set "to" to 0. We do not want to go upstream if variant is downstream. The same for second if but for downstream.
         float qtl_maf_from;
         float qtl_maf_to; 
         int qtl_dist_phe_var_from;
@@ -61,23 +63,7 @@ void analysis_cpp::createNullDistribution(){
         if(toRandomPeak.size() == 0){
             cout << "No variants found" << endl;
             empty++;
-            /*cout << "Increasing window_size to 3000 and MAF 0.02 and rechecking".
-            for(int s=0; s < null_count; s++){
-                // Check whether eQTL dist and MAF windows are matching with any TEs. 
-                // If they do not match, through message
-                float new_maf_from = qtl_maf[i] - (qtl_maf[i] * 0.02)
-                    float new_maf_to = qtl_maf[i]
-                if(qtl_dist_phe_var[i] > 0){
-                    int new_qtl_dist_from = (qtl_dist_phe_var[i] - 3000) < 0 ? 0: qtl_dist_phe_var[i] - 3000;
-                    int new_qtl_dist_to = qtl_dist_phe_var[i] + 3000;
-                    if(new_qtl_dist_from <= downstream_distance[s] && new_qtl_dist_to >= downstream_distance[s]){
-                        if(new_maf_from <= null_maf[s] && null_maf_to >= null_maf[s] && nominal[s] != 1){
-                            if(ind(nulldistribution.begin(),nulldistribution.end(),null_id[i]) == nulldistribution.end()))
-                        }
-                    }
-                }
-            }
-            //cout << toRandomPeak.size() << endl;*/
+
         }else{
             //cout << toRandomPeak.size() << endl;
             std::shuffle(toRandomPeak.begin(), toRandomPeak.end(), std::default_random_engine(seed));

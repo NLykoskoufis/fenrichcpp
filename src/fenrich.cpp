@@ -6,17 +6,17 @@ void printModes(){
     cout << "Usage:" << endl;
     cout << " fenrich [mode] [options]" << endl;
     cout << " eg: fenrich null --help" << endl;
-    cout << "Available modes:" << endl;
-    cout << " null  Create null file for enrichment later on" << endl;
-    cout << " enrich    Perform functional enrichment for QTLs" << endl;
+    cout << "\x1B[36;1m" << "Available modes:" << "\033[0m" <<  endl;
+    cout << "\x1B[37;1m" <<   " null" << "\033[0m" << " Create null file for enrichment later on" << endl;
+    cout << "\x1B[37;1m" << " enrich" << "\033[0m" << " Perform functional enrichment for QTLs" << endl;
 }
 
 int main(int argc, char ** argv) {
 
-    cout << "Fenrich" << endl; 
-    cout << "Authors : Nikolaos M.R. LYKOSKOUFIS" << endl;
-    cout << "Contact : nikolaos.lykoskoufis@unige.ch" << endl;
-    cout << "Version : version 0.1" << endl;
+    cout << "\n" << "\x1B[32;1m" << "Functional enrichment for QTL variants" << "\033[0m" << endl; 
+    cout << " * Authors : Nikolaos M.R. LYKOSKOUFIS" << endl;
+    cout << " * Contact : nikolaos.lykoskoufis@unige.ch" << endl;
+    cout << " * Version : version 0.1" << endl;
 
     // MODES 
     vector < string > args;

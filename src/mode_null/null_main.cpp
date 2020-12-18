@@ -34,7 +34,7 @@ void null_main(std::vector < std::string > & argv) {
 		exit(0);
 	}
     
-    std::cout << "Generating null file.";
+    std::cout << "\n" << "\x1B[32;1m" << "CREATING NULL FILE" << "\033[0m" << endl;
     if(D.options.count("help")) {
         std::cout << D.option_descriptions << std::endl;
         exit(0);
