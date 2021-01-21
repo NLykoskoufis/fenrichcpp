@@ -109,8 +109,13 @@ void analysis_main(vector < string > & argv) {
         cout << " * Window size    :" << D.window_size << endl;
         cout << " * MAF window     :" << D.window_maf << endl;
 
+        cout << "Reading [" << D.options["null"].as<string>() << "]";
         D.readNull(D.options["null"].as<string>()); 
+
+        cout << "Reading [" << D.options["phen"].as<string>() << "]"; 
         D.readIntersection(D.options["phen"].as<string>()); 
+        
+        cout << "Reading [" << D.options["qtl"].as<string>() << "]"; 
         D.readQTL(D.options["qtl"].as<string>()); 
         cout << "Creating null distribution for the enrichment" << endl;
         D.createNullDistribution();
