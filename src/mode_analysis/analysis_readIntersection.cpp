@@ -20,12 +20,5 @@ void analysis_cpp::readIntersection(string finter){
         intersection_peaks.push_back(line[9]);
     }
     cout << "Read " << linecount << endl;
-    cout << "Found " << peaks.size() << endl;
-
-    cout << "[";
-    for(auto x:peaks){
-       cout << x << ","; 
-    }
-    cout << "] peaks." << endl;
     intersection_count = linecount;
 }
