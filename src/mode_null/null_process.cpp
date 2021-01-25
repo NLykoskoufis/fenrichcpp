@@ -5,7 +5,7 @@ using namespace std;
 
 void fenrich_cpp::fenrichcpp_createTEnull(string fout){
     output_file fdo (fout); // output_file
-    fdo << "#chr\tstart\tend\tid\tn_var_in_cis\tnominalQTL\tMAF\tupstream_distance\tdownstream_distance\tupstream_phen\tdownstream_phen" << endl;
+    fdo << "#chr\tstart\tend\tid\tn_var_in_cis\tnominalQTL\tMAF\tupstream_distance\tupstream_phen\tdownstream_distance\tdownstream_phen" << endl;
     
     int cis_window=1000000;
     
