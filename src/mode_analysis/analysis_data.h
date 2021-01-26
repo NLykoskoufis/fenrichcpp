@@ -13,6 +13,9 @@ struct genomic_region{
     int start, end;
 };
 
+struct positions{
+    int start, end;
+};
 
 class analysis_cpp {
 public:
@@ -68,6 +71,7 @@ public:
     std::vector < int > phen_start;
     std::vector < int > phen_end;
     
+    unordered_map < std::string, positions > phen_index;
 
     // READ DATA 
     void readQTL(string);
@@ -79,7 +83,7 @@ public:
     void createNullDistribution();
     void functionalEnrichment(string);
     void filterQTL();
-    void performIntersect();
+    void performIntersect(string);
 
 
     // INLINE FUNCTIONS FOR PERFORMANCE

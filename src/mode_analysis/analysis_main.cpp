@@ -104,32 +104,40 @@ void analysis_main(vector < string > & argv) {
         D.window_size = D.options["window_size"].as < unsigned int >();
         D.window_maf = D.options["maf_window"].as < float >();
 
-        cout << "performing functional enrichment" << endl;
+        cout << "Performing functional enrichment" << endl;
         cout << " * Random variants: " << D.random_variants << endl;
         cout << " * Window size    :" << D.window_size << endl;
         cout << " * MAF window     :" << D.window_maf << endl;
 
-        cout << "Reading [" << D.options["null"].as<string>() << "]" << std::endl;
+        cout << " * Reading [" << D.options["null"].as<string>() << "]" << std::endl;
         D.readNull(D.options["null"].as<string>()); 
 
         //cout << "Reading [" << D.options["phen"].as<string>() << "]"; 
         //D.readIntersection(D.options["phen"].as<string>()); 
         
-        cout << "Reading [" << D.options["qtl"].as<string>() << "]" << std::endl;
+        cout << " * Reading [" << D.options["qtl"].as<string>() << "]" << std::endl;
         D.readQTL(D.options["qtl"].as<string>()); 
         
-        cout << "Creating null distribution for the enrichment" << endl;
+        cout << " * Reading [" << D.options["phen"].as<string>() << "]" << std::endl;
+        D.readPhenotypes(D.options["phen"].as<string>());
+
+        cout << " ** Creating null distribution for the enrichment" << endl;
         D.createNullDistribution();
         //cout << "Performing Enrichment over the null" << endl;
         //D.functionalEnrichment(D.options["out"].as<string>());
-        cout << "Reading [" << D.options["phen"].as<string>() << "]" << std::endl;
-        D.readPhenotypes(D.options["phen"].as<string>());
         
-        std::cout << D.phen_chr[0] << std::endl;
-        std::cout << D.qtl_chr[0] << std::endl;
-        std::cout << D.qtl_id.size() << std::endl;
         
-        std::cout << "Performing qtl intersection" << std::endl;
-        D.performIntersect();
-    }
+        //std::cout << D.phen_chr[0] << std::endl;
+        //std::cout << D.qtl_chr[0] << std::endl;
+        //std::cout << D.qtl_id.size() << std::endl;
+        
+        std::cout << " ** Performing qtl intersection" << std::endl;
+        D.performIntersect(D.options["out"].as<string>());
+
+        output_file fdo ("checking_qtl_distances.txt");
+        for(int i=0; i<D.qtl_id.size(); i++)
+        {
+            fdo << D.qtl_chr[i] << "\t" << D.qtl_start[i] << "\t" << D.qtl_end[i] << "\t" << D.qtl_id[i] << "\t" << D.qtl_dist_phe_var[i] << std::endl;
+        }
+    }   
 }
