@@ -2,7 +2,7 @@
 
 using namespace std;
 
-void analysis_cpp::createNullDistribution(){
+void analysis_cpp::createNullDistribution(string fout){
 
     /*
     For each eQTL:
@@ -12,7 +12,8 @@ void analysis_cpp::createNullDistribution(){
 
     When the null distribution of SNPs are done, then we can perform the functional enrichment. 
     */
-   output_file fdo ("null_distribution_used.txt");
+   std::string output_name = fout + "_null_distribution_used";
+   output_file fdo (output_name);
    fdo << "qtl_id\tmaf\tdist_phe_var\tmaf_from\tmaf_to\tdist_from\tdist_to\trandom_variants" << endl;
    for(int i=0; i<qtl_id.size(); i++){
         vector < string > toRandomPeak;
@@ -79,7 +80,7 @@ void analysis_cpp::createNullDistribution(){
                 for(int r=0; r < 10; r++){
                     nulldistribution.push_back(toRandomPeak[v[r]]);
                     nulldistribution_regions.push_back(toRandomPeak_regions[v[r]]);
-                    fdo << toRandomPeak[r];
+                    fdo << toRandomPeak[v[r]];
                     if(r < 10) fdo << ",";
                 }
                 fdo << endl;
@@ -88,7 +89,7 @@ void analysis_cpp::createNullDistribution(){
                 for(int r=0; r < toRandomPeak.size(); r++){
                     nulldistribution.push_back(toRandomPeak[v[r]]);
                     nulldistribution_regions.push_back(toRandomPeak_regions[v[r]]);
-                    fdo << toRandomPeak[r];
+                    fdo << toRandomPeak[v[r]];
                     if(r < toRandomPeak.size()) fdo << ",";
                     below_random_threshold++;
                 }

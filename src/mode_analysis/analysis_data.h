@@ -80,9 +80,9 @@ public:
     void readPhenotypes(std::string);
 
     // PROCESS
-    void createNullDistribution();
+    void createNullDistribution(string);
     void functionalEnrichment(string);
-    void filterQTL();
+    //void filterQTL();
     void performIntersect(string);
 
 

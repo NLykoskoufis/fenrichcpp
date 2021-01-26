@@ -2,62 +2,6 @@
 
 using namespace std;
 
-/*void analysis_main(vector < string > & argv){
-    analysis_cpp D;
-
-    boost::program_options::options_description options ("Allowed options");
-    options.add_options()
-        ("help","produce help message")
-        ("null", boost::program_options::value<string>(), "null file created with null mode.")
-        ("qtl",boost::program_options::value<string>(), "QTL output file. Same layout as QTLtools cis output.")
-        ("phen", boost::program_options::value<string>(), "phenotypes to enrich. Specific format obtained from bedtools intersect [For now. Maybe later will do the overlap inside the code :)]")
-        ("out", boost::program_options::value<string>(), "Output file.")
-    ;
-
-    boost::program_options::variables_map vm;
-    boost::program_options::store(boost::program_options::parse_command_line(argv, options), vm);
-    boost::program_options::notify(vm);
-
-    if (vm.count("help")) {
-        cout << options << endl;
-    }
-
-    if (vm.count("null")){
-        cout << "Input null file: " << vm["vcf"].as<string>() << endl;
-    }else{
-        cout << "No input file specified. You need to specify a null file." << endl;
-    }
-
-    if (vm.count("phen")){
-        cout << "Input phenotype file: " << vm["bed"].as<string>() << endl;
-    }else{
-        cout << "No input file specified. You need to specify a phenotype file." << endl;
-    }
-
-    if (vm.count("qtl")){
-        cout << "Input qtl file: " << vm["qtl"].as<string>() << endl;
-    }else{
-        cout << "No input file specified. You need to specify a qtl file." << endl;
-    }
-
-    if (vm.count("out")){
-        cout << "Output file: " << vm["out"].as<string>() << endl;
-    }else{
-        cout << "You need to specify an output file." << endl;
-    }
-
-    if (vm.count("bed") && vm.count("vcf") && vm.count("out")){
-        D.readNull(vm["null"].as<string>()); 
-        D.readIntersection(vm["phen"].as<string>()); 
-        D.readQTL(vm["qtl"].as<string>()); 
-        cout << "Creating null distribution for the enrichment" << endl;
-        D.createNullDistribution();
-        cout << "Performing Enrichment over the null" << endl;
-        D.functionalEnrichment(vm["out"].as<string>());
-    }
-}
-*/
-
 void analysis_main(vector < string > & argv) {
 	analysis_cpp D;
     boost::program_options::options_description opt_basic ("\x1B[32mBasics\33[0m");
@@ -122,7 +66,7 @@ void analysis_main(vector < string > & argv) {
         D.readPhenotypes(D.options["phen"].as<string>());
 
         cout << " ** Creating null distribution for the enrichment" << endl;
-        D.createNullDistribution();
+        D.createNullDistribution(D.options["out"].as<string>());
         //cout << "Performing Enrichment over the null" << endl;
         //D.functionalEnrichment(D.options["out"].as<string>());
         
@@ -134,10 +78,10 @@ void analysis_main(vector < string > & argv) {
         std::cout << " ** Performing qtl intersection" << std::endl;
         D.performIntersect(D.options["out"].as<string>());
 
-        output_file fdo ("checking_qtl_distances.txt");
+        /*output_file fdo ("checking_qtl_distances.txt");
         for(int i=0; i<D.qtl_id.size(); i++)
         {
             fdo << D.qtl_chr[i] << "\t" << D.qtl_start[i] << "\t" << D.qtl_end[i] << "\t" << D.qtl_id[i] << "\t" << D.qtl_dist_phe_var[i] << std::endl;
-        }
+        }*/
     }   
 }
