@@ -21,10 +21,9 @@ sort -V -k1 -k2,2n -k3,3n H3K4me3_data.bed > H3K4me3_data_sorted.bed
 
 ### Step2: Create null file 
 
-Before creating the null file you also need to provide a list of variants that are nominally significant eQTLs. These can be provide by using QTLtoos cis --nominal 1. Then you need to only keep the significant snps, like so
-
+Before creating the null file you also need to provide a list of variants that are nominally significant eQTLs. These can be provided by using QTLtools cis --nominal 0.05. Then you need to only keep the var_id. It should be the 8th column
 ```bash
-zcat nominal1_chrALL.txt.gz | awk '{if($12 <0.05) {print $8}}' > nominal_only_significant_snps.txt
+zcat nominal005_chrALL.txt.gz | cut -d" " -f8 | sort | uniq > nominal_only_significant_snps.txt
 ```
 
 ```bash
