@@ -8,24 +8,16 @@ The functional enrichment is performed in two steps. The first step creates a fi
 
 ## Step by step example
 
-### Step1: Overlap using Bedtools
+### Step1: Check that phenotype file is sorted.
 
-First, we need to overlap our variants with the ChIP-seq data we want to perform enrichment.
+First, we need to check that the phenotype file is sorted. If not sorted then please sort using either unix-sort or bedtools sort. The file should be in bed format without the header.
 
 ```bash
-bedtools intersect -a variants.bed.gz -b ChIP_seq_data.bed.gz -wa -wb > overlaped_elements.txt
+bedtools sort -i H3K4me3_data.bed > H3K4me3_data_sorted.bed
+# or 
+sort -V -k1 -k2,2n -k3,3n H3K4me3_data.bed > H3K4me3_data_sorted.bed
 ```
-The output file should look like this
 
-```
-1       762272  762273  rs3115849       G/A     +       1       762183  762956  CTCF
-1       762588  762589  rs71507461      G/C     +       1       762183  762956  CTCF
-1       762591  762592  rs71507462      C/G     +       1       762183  762956  CTCF
-1       762600  762601  rs71507463      T/C     +       1       762183  762956  CTCF
-1       762631  762632  rs61768173      T/A     +       1       762183  762956  CTCF
-1       805555  805556  rs72631880      T/A     +       1       804870  805987  CTCF
-1       839872  839873  rs192553893     C/T     +       1       839340  840863  CTCF
-```
 
 ### Step2: Create null file 
 
@@ -65,7 +57,7 @@ By default the window size is set to ± 2'500, the maf window to ±2% and the nu
 fenrich enrich \
     --nul <null file > \
     --qtl <qtls to be enriched> \
-    --phen <variant overlaped with peaks file> \
+    --phen <phenotypes> \
     --out <out file> 
 ```
 
