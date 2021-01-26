@@ -11,6 +11,9 @@ void analysis_cpp::readQTL(string fqtl){
 
     vector < string > snp_id;
     vector < int > dist_phe_var;
+    vector < string > snp_chr;
+    vector < int > snp_start;
+    vector < int > snp_end;
 
     //read header 
     vector < string > header;
@@ -27,6 +30,14 @@ void analysis_cpp::readQTL(string fqtl){
         qtl_count++;
         
         snp_id.push_back(line[7]);
+        if(has_chr(line[8])){
+            snp_chr.push_back(line[8].substr(3,line[8].size()));
+        }else{
+            snp_chr.push_back(line[8]);
+        }
+        snp_start.push_back(stoi(line[9]));
+        snp_end.push_back(stoi(line[10]));
+
         dist_phe_var.push_back(stoi(line[6]));
         
     } // Finished reading the file. 
@@ -40,10 +51,12 @@ void analysis_cpp::readQTL(string fqtl){
     for(int i =0; i < linecount; i++){
         int dist = 1000000000;
         if(count(snp_id.begin(),snp_id.end(), snp_id[i])==1){
-            //cout << snp_id[i] << " " << count(snp_id.begin(),snp_id.end(), snp_id[i]) << endl;
             qtl_id.push_back(snp_id[i]);
             qtl_dist_phe_var.push_back(dist_phe_var[i]);
-            
+            qtl_chr.push_back(snp_chr[i]);
+            qtl_start.push_back(snp_start[i]);
+            qtl_end.push_back(snp_end[i]);
+
             // We need to also write the maf
             unordered_map<std::string,float>::iterator got = map_maf.find(snp_id[i]);
             if(got == map_maf.end()){
@@ -73,7 +86,9 @@ void analysis_cpp::readQTL(string fqtl){
         
             qtl_id.push_back(snp_id[i]);
             qtl_dist_phe_var.push_back(dist);
-
+            qtl_chr.push_back(snp_chr[i]);
+            qtl_start.push_back(snp_start[i]);
+            qtl_end.push_back(snp_end[i]);
             // GET MAF 
             unordered_map<std::string,float>::iterator got = map_maf.find(snp_id[i]);
             if(got == map_maf.end()){
