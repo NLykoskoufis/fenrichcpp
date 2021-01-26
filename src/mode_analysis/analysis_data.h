@@ -8,6 +8,12 @@
 using namespace std;
 using namespace boost::math;
 
+struct genomic_region{
+    std::string chrom;
+    int start, end;
+};
+
+
 class analysis_cpp {
 public:
 
@@ -21,18 +27,20 @@ public:
     vector < string >  qtl_id;
     vector < int > qtl_dist_phe_var;
     vector < string > qtl_phe_strand;
-    //vector < int > qtl_dist_phe_var_from;
-    //vector < int > qtl_dist_phe_var_to;
+    vector < string > qtl_chr;
+    vector < int > qtl_start;
+    vector < int > qtl_end;
     vector < float > qtl_maf;
-    //vector < float > qtl_maf_from;
-    //vector < float > qtl_maf_to;
-    
+
     unordered_map < string, int > qtl_map;
 
 
     // NULL
     int null_count;
     vector < string > null_id;
+    vector < string > null_chr;
+    vector < int > null_start;
+    vector < int > null_end;
     vector < float > null_maf;
     vector < int > upstream_distance;
     vector < int > downstream_distance; 
@@ -41,6 +49,7 @@ public:
 
     // NULL DISTRIBUTION
     vector < string > nulldistribution; // Contains all the variants for the null distribution for the functional enrichment analysis
+    vector < genomic_region > nulldistribution_regions;
     unordered_map <string, int> removeVar; 
     int empty=0;
     int below_random_threshold =0;
@@ -53,21 +62,31 @@ public:
     vector < string > intersection_snp;
     vector < string > intersection_peaks;
 
+    // READ PHENOTYPES
+    int phen_count;
+    std::vector < string > phen_chr;
+    std::vector < int > phen_start;
+    std::vector < int > phen_end;
     
 
     // READ DATA 
     void readQTL(string);
     void readNull(string);
     void readIntersection(string);
+    void readPhenotypes(std::string);
 
     // PROCESS
     void createNullDistribution();
     void functionalEnrichment(string);
     void filterQTL();
+    void performIntersect();
+
+
     // INLINE FUNCTIONS FOR PERFORMANCE
     double fisher_test(unsigned, unsigned, unsigned, unsigned);
     double odds_ratio(unsigned, unsigned, unsigned, unsigned);
     int findSNP(vector<string>,string);
+    bool has_chr(std::string);
 
     // OPTIONS 
     boost::program_options::options_description option_descriptions;
@@ -85,6 +104,12 @@ void analysis_main(vector < string > & argv);
 //******************** INLINE FUNCTIONS *************************//
 //***************************************************************//
 
+inline bool analysis_cpp::has_chr(std::string chr)
+{
+    const char* chrom = "chr";
+    bool b = boost::algorithm::contains(chr, chrom);
+    return b;
+}
 
 
 inline int analysis_cpp::findSNP(vector < string > vec,string snp){

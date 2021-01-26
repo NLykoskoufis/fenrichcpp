@@ -26,6 +26,13 @@ void analysis_cpp::readNull(string fnull){
 
         boost::split(line, buffer, boost::is_any_of("\t"));
         null_id.push_back(line[3]);
+        
+        if(has_chr(line[0])) null_chr.push_back(line[0].substr(3,line[0].size()));
+        else null_chr.push_back(line[0]);
+
+        null_start.push_back(std::stoi(line[1]));
+        null_end.push_back(std::stoi(line[2]));
+
         nominal.push_back(stoi(line[5]));
         null_maf.push_back(stof(line[6]));
         if(line[7].find("NA") != string::npos) upstream_distance.push_back(stoi("1"));

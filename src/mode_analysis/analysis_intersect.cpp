@@ -1,0 +1,38 @@
+#include "analysis_data.h"
+
+
+void analysis_cpp::performIntersect(){
+    //output_file fdo("/Users/srv/beegfs/scratch/users/l/lykoskou/TE/V3/data_qtls/eqtls/enrichment/analysis_functionalEnrichment/fenrich_cpp/test/fenrich_cpp_overlapped.txt");
+
+    int qtl_overlap=0;
+    int null_overlap=0;
+    for(int i=0; i<qtl_id.size(); i++)
+    {
+        for(int j=0; j<phen_count; j++)
+        {
+            if(qtl_chr[i].compare(phen_chr[j]) != 0) continue;
+            if(qtl_start[i] <= phen_end[j] && qtl_end[i] >= phen_start[j])
+            {
+                //fdo << qtl_id[i] << std::endl;
+                qtl_overlap++;
+                break; // Count only once!
+            }
+        }
+    }
+    
+    
+    for(int i=0; i < nulldistribution.size();i++)
+    {
+        for(int j=0; j<phen_count; j++)
+        {
+            if(nulldistribution_regions[i].chrom.compare(phen_chr[j]) != 0) continue;
+            if(nulldistribution_regions[i].start <= phen_end[j] && nulldistribution_regions[i].end >= phen_start[j])
+            {
+                null_overlap++;
+                break;
+            }
+        }
+    }
+    std::cout << qtl_overlap << " " << qtl_id.size() - qtl_overlap <<  std::endl;
+    std::cout << null_overlap << " " << nulldistribution.size() - null_overlap << std::endl;
+}

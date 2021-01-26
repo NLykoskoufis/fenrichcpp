@@ -16,6 +16,7 @@ void analysis_cpp::createNullDistribution(){
    fdo << "qtl_id\tmaf\tdist_phe_var\tmaf_from\tmaf_to\tdist_from\tdist_to\trandom_variants" << endl;
    for(int i=0; i<qtl_id.size(); i++){
         vector < string > toRandomPeak;
+        vector < genomic_region > toRandomPeak_regions;
         cout << "Processed " << i+1 << " eQTLs." << endl;
         
         // GET UPSTREAM AND DOWNSTREAM 
@@ -47,6 +48,7 @@ void analysis_cpp::createNullDistribution(){
                    if(qtl_maf_from <= null_maf[s] && qtl_maf_to >= null_maf[s]){
                        if(nominal[s] != 1 && find(nulldistribution.begin(),nulldistribution.end(), null_id[s]) == nulldistribution.end()){
                            toRandomPeak.push_back(null_id[s]);
+                           toRandomPeak_regions.push_back({null_chr[s], null_start[s], null_end[s]});
                        }
                    } 
                }
@@ -55,6 +57,7 @@ void analysis_cpp::createNullDistribution(){
                     if(qtl_maf_from <= null_maf[s] && qtl_maf_to >= null_maf[s]){
                         if(nominal[s] != 1 && find(nulldistribution.begin(),nulldistribution.end(),null_id[s]) == nulldistribution.end()){
                             toRandomPeak.push_back(null_id[s]);
+                            toRandomPeak_regions.push_back({null_chr[s], null_start[s], null_end[s]});
                         }
                     }
                 }
@@ -66,11 +69,16 @@ void analysis_cpp::createNullDistribution(){
 
         }else{
             //cout << toRandomPeak.size() << endl;
-            std::shuffle(toRandomPeak.begin(), toRandomPeak.end(), std::default_random_engine(seed));
+            std::vector < int > v(toRandomPeak.size());
+            std::iota(std::begin(v), std::end(v), 0);
+            std::shuffle(v.begin(), v.end(), std::default_random_engine(seed));
+            
+            //std::shuffle(toRandomPeak.begin(), toRandomPeak.end(), std::default_random_engine(seed));
             if(toRandomPeak.size() >= 10){
                 
                 for(int r=0; r < 10; r++){
-                    nulldistribution.push_back(toRandomPeak[r]);
+                    nulldistribution.push_back(toRandomPeak[v[r]]);
+                    nulldistribution_regions.push_back(toRandomPeak_regions[v[r]]);
                     fdo << toRandomPeak[r];
                     if(r < 10) fdo << ",";
                 }
@@ -78,7 +86,8 @@ void analysis_cpp::createNullDistribution(){
             }else{
                 
                 for(int r=0; r < toRandomPeak.size(); r++){
-                    nulldistribution.push_back(toRandomPeak[r]);
+                    nulldistribution.push_back(toRandomPeak[v[r]]);
+                    nulldistribution_regions.push_back(toRandomPeak_regions[v[r]]);
                     fdo << toRandomPeak[r];
                     if(r < toRandomPeak.size()) fdo << ",";
                     below_random_threshold++;
