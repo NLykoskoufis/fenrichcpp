@@ -53,6 +53,8 @@ void analysis_main(vector < string > & argv) {
         cout << " * Window size    :" << D.window_size << endl;
         cout << " * MAF window     :" << D.window_maf << endl;
 
+        Instrumentor::Get().BeginSession("Profiling fenrichpp");
+
         cout << " * Reading [" << D.options["null"].as<string>() << "]" << std::endl;
         D.readNull(D.options["null"].as<string>()); 
 
@@ -83,5 +85,6 @@ void analysis_main(vector < string > & argv) {
         {
             fdo << D.qtl_chr[i] << "\t" << D.qtl_start[i] << "\t" << D.qtl_end[i] << "\t" << D.qtl_id[i] << "\t" << D.qtl_dist_phe_var[i] << std::endl;
         }*/
+        Instrumentor::Get().EndSession();
     }   
 }
