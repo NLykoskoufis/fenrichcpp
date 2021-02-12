@@ -4,6 +4,8 @@
 void analysis_cpp::performIntersect(std::string fout){
     //output_file fdo("/Users/srv/beegfs/scratch/users/l/lykoskou/TE/V3/data_qtls/eqtls/enrichment/analysis_functionalEnrichment/fenrich_cpp/test/fenrich_cpp_overlapped.txt");
 
+    PROFILE_FUNCTION();
+    
     int qtl_overlap=0;
     int null_overlap=0;
     for(int i=0; i<qtl_id.size(); i++)

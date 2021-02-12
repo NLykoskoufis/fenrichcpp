@@ -4,6 +4,7 @@
 
 
 #include "../../lib/compression_io.h"
+#include "../../lib/Instrumentor.h"
 
 //INCLUDE STANDARD TEMPLATE LIBRARY USEFULL STUFFS (STL)
 #include <vector>
@@ -33,6 +34,15 @@ extern "C" {
 	#include <htslib/vcf.h>
 	#include <htslib/vcfutils.h>
 }
+
+#define PROFILING 1
+#if PROFILING
+#define PROFILE_SCOPE(name) InstrumentationTimer timer##__LINE__(name)
+#define PROFILE_FUNCTION() PROFILE_SCOPE(__FUNCSIG__)
+#else
+#define PROFILE_SCOPE(name)
+#endif
+
 
 using namespace std;
 

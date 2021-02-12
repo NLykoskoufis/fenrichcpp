@@ -4,6 +4,9 @@ using namespace std;
 
 void analysis_cpp::createNullDistribution(string fout){
 
+
+    PROFILE_FUNCTION();
+
     /*
     For each eQTL:
         1. Loop over all null and get all the SNPs matching MAF, distance and that are not eQTLs (nominal != 1).
