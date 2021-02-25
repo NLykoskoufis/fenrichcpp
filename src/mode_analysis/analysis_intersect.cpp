@@ -10,9 +10,12 @@ void analysis_cpp::performIntersect(std::string fout){
     int null_overlap=0;
     for(int i=0; i<qtl_id.size(); i++)
     {   
+        std::cout << qtl_chr[i] << std::endl;
         unordered_map<std::string,positions>::iterator got = phen_index.find(qtl_chr[i]);
+        if (got == phen_index.end()) continue;
         for(int j=got->second.start; j < got->second.end; j++)
         {
+            //std::cout << i << std::endl;
             if(qtl_chr[i].compare(phen_chr[j]) != 0) std::cout << "Problem" << std::endl;
             if(qtl_start[i] <= phen_end[j] && qtl_end[i] >= phen_start[j])
             {
@@ -27,6 +30,7 @@ void analysis_cpp::performIntersect(std::string fout){
     for(int i=0; i < nulldistribution.size();i++)
     {   
         unordered_map<std::string,positions>::iterator got = phen_index.find(nulldistribution_regions[i].chrom);
+        if (got == phen_index.end()) continue;
         for(int j=got->second.start; j < got->second.end; j++)
         {
             if(nulldistribution_regions[i].chrom.compare(phen_chr[j]) != 0) std::cout << "Problem" << std::endl;
@@ -40,6 +44,12 @@ void analysis_cpp::performIntersect(std::string fout){
     int qtl_no_overlap = qtl_id.size() - qtl_overlap;
     int null_no_overlap = nulldistribution.size() - null_overlap;
     
+    if(qtl_overlap == 0 || null_overlap == 0)
+    {
+        qtl_overlap++;
+        null_overlap++;
+    } 
+
     std::cout << qtl_overlap << " " << qtl_no_overlap <<  std::endl;
     std::cout << null_overlap << " " << null_no_overlap << std::endl;
 

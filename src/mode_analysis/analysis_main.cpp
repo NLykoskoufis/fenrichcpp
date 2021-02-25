@@ -66,25 +66,19 @@ void analysis_main(vector < string > & argv) {
         
         cout << " * Reading [" << D.options["phen"].as<string>() << "]" << std::endl;
         D.readPhenotypes(D.options["phen"].as<string>());
+        
+        for (auto it = D.phen_index.cbegin(); it != D.phen_index.cend(); ++it) {
+            std::cout << "{" << (*it).first << "->" << (*it).second.start << ":" << (*it).second.end << std::endl;
+        }
 
         cout << " ** Creating null distribution for the enrichment" << endl;
         D.createNullDistribution(D.options["out"].as<string>());
-        //cout << "Performing Enrichment over the null" << endl;
-        //D.functionalEnrichment(D.options["out"].as<string>());
         
-        
-        //std::cout << D.phen_chr[0] << std::endl;
-        //std::cout << D.qtl_chr[0] << std::endl;
-        //std::cout << D.qtl_id.size() << std::endl;
         
         std::cout << " ** Performing qtl intersection" << std::endl;
         D.performIntersect(D.options["out"].as<string>());
 
-        /*output_file fdo ("checking_qtl_distances.txt");
-        for(int i=0; i<D.qtl_id.size(); i++)
-        {
-            fdo << D.qtl_chr[i] << "\t" << D.qtl_start[i] << "\t" << D.qtl_end[i] << "\t" << D.qtl_id[i] << "\t" << D.qtl_dist_phe_var[i] << std::endl;
-        }*/
+
         Instrumentor::Get().EndSession();
     }   
 }
