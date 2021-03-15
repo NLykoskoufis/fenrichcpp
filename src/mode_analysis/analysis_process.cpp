@@ -229,6 +229,8 @@ void analysis_cpp::createNullDistribution(string fout){
             empty++;
 
         }else{
+            pickRandomVariants(toRandomPeak);
+            /*
             //cout << toRandomPeak.size() << endl;
             std::vector < int > v(toRandomPeak.size());
             std::iota(std::begin(v), std::end(v), 0);
@@ -259,12 +261,44 @@ void analysis_cpp::createNullDistribution(string fout){
                 fdo << endl;
             }
             //cout << nulldistribution.size() << endl;
-             
+        */    
         }
     } // QTL for loop
 
 }
 
+void analysis_cpp::pickRandomVariants(std::vector < std::string >& toRandomPeak){
+    //cout << toRandomPeak.size() << endl;
+    std::vector < int > v(toRandomPeak.size());
+    std::iota(std::begin(v), std::end(v), 0);
+    std::shuffle(v.begin(), v.end(), std::default_random_engine(seed));
+    if(toRandomPeak.size() >= 10){
+        
+        for(int r=0; r < 10; r++){
+            nulldistribution.push_back(toRandomPeak[v[r]]);
+            nulldistribution_regions.push_back(toRandomPeak_regions[v[r]]);
+            fdo << toRandomPeak[v[r]];
+            //std::unordered_map < std::string, int >::iterator got = null_index.find(toRandomPeak[v[r]]);
+        
+            if(r < 10) fdo << ",";
+        }
+        fdo << endl;
+    }else{
+        
+        for(int r=0; r < toRandomPeak.size(); r++){
+            nulldistribution.push_back(toRandomPeak[v[r]]);
+            nulldistribution_regions.push_back(toRandomPeak_regions[v[r]]);
+            fdo << toRandomPeak[v[r]];
+            
+            //std::unordered_map < std::string, int >::iterator got = null_index.find(toRandomPeak[v[r]]);
+            
+            if(r < toRandomPeak.size()) fdo << ",";
+            below_random_threshold++;
+        }
+        fdo << endl;
+    }
+    //cout << nulldistribution.size() << endl;  
+}
 
 void analysis_cpp::functionalEnrichment(string fout){
     /*
