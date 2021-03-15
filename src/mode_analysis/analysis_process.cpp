@@ -229,7 +229,7 @@ void analysis_cpp::createNullDistribution(string fout){
             empty++;
 
         }else{
-            pickRandomVariants(toRandomPeak);
+            pickRandomVariants(toRandomPeak, toRandomPeak_regions);
             /*
             //cout << toRandomPeak.size() << endl;
             std::vector < int > v(toRandomPeak.size());
@@ -267,7 +267,7 @@ void analysis_cpp::createNullDistribution(string fout){
 
 }
 
-void analysis_cpp::pickRandomVariants(std::vector < std::string >& toRandomPeak){
+void analysis_cpp::pickRandomVariants(std::vector < std::string >& toRandomPeak, std::vector < genomic_region >& toRandomPeak_regions){
     //cout << toRandomPeak.size() << endl;
     std::vector < int > v(toRandomPeak.size());
     std::iota(std::begin(v), std::end(v), 0);

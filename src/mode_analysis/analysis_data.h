@@ -90,7 +90,7 @@ public:
     //void filterQTL();
     void performIntersect(string);
     bool removeVarFromNull(int&);
-    void pickRandomVariants(std::vector < std::string >&);
+    void pickRandomVariants(std::vector < std::string >&, std::vector < genomic_region >&);
 
     // INLINE FUNCTIONS FOR PERFORMANCE
     double fisher_test(unsigned, unsigned, unsigned, unsigned);
