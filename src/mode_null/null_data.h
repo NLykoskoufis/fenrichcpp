@@ -4,7 +4,7 @@
 
 
 #include "../../lib/compression_io.h"
-#include "../../lib/Instrumentor.h"
+//#include "../../lib/Instrumentor.h"
 
 //INCLUDE STANDARD TEMPLATE LIBRARY USEFULL STUFFS (STL)
 #include <vector>

@@ -3,7 +3,7 @@
 void analysis_cpp::readPhenotypes(std::string fbed)
 {
 
-    PROFILE_FUNCTION();
+    //PROFILE_FUNCTION();
 
     input_file fd (fbed);
     std::string buffer;

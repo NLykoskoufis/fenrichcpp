@@ -1,0 +1,34 @@
+#[2021-02-25 09:51:08 AM]
+cd fenrichcpp
+#[2021-02-25 09:51:15 AM]
+make clean 
+#[2021-02-25 09:51:20 AM]
+htop
+#[2021-02-25 09:52:53 AM]
+make baobab -j5
+#[2021-03-11 11:50:13 AM]
+cd Software/fenrichcpp
+#[2021-03-11 11:50:15 AM]
+lh
+#[2021-03-12 10:33:22 AM]
+cd fenrichcpp
+#[2021-03-12 10:33:23 AM]
+lh
+#[2021-03-12 10:38:05 AM]
+cd fenrichcpp
+#[2021-03-12 10:40:35 AM]
+vim src/mode_analysis/analysis_process.cpp
+#[2021-03-12 10:40:38 AM]
+vim analysis_process.cpp
+#[2021-03-15 01:57:16 PM]
+cd fenrichcpp
+#[2021-03-15 01:57:19 PM]
+git status
+#[2021-03-15 02:17:42 PM]
+cd ../fenrichcpp
+#[2021-03-15 02:17:43 PM]
+lh
+#[2021-03-15 02:17:51 PM]
+lh
+#[2021-03-15 02:17:51 PM]
+pwd

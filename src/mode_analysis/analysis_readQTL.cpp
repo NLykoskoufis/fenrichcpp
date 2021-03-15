@@ -6,7 +6,7 @@ using namespace std;
 
 void analysis_cpp::readQTL(string fqtl){
     
-    PROFILE_FUNCTION();
+    //PROFILE_FUNCTION();
     
     
     input_file fd (fqtl);
