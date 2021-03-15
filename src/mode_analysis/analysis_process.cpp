@@ -190,9 +190,13 @@ void analysis_cpp::createNullDistribution(string fout){
                if(qtl_dist_phe_var_from <= downstream_distance[s] && qtl_dist_phe_var_to>= downstream_distance[s]){
                    if(qtl_maf_from <= null_maf[s] && qtl_maf_to >= null_maf[s]){
                        if(nominal[s] != 1){
-                           toRandomPeak.push_back(null_id[s]);
-                           toRandomPeak_regions.push_back({null_chr[s], null_start[s], null_end[s]});
-                           null_index.insert(std::make_pair(null_id[s],s)); 
+                           if(mode == NO_RESAMPLING){
+                                if(find(nulldistribution.begin(),nulldistribution.end(), null_id[s]) == nulldistribution.end()){
+                                    toRandomPeak.push_back(null_id[s]);
+                                    toRandomPeak_regions.push_back({null_chr[s], null_start[s], null_end[s]});
+                                    null_index.insert(std::make_pair(null_id[s],s));            
+                                }
+                            }
                        }
                    } 
                }
@@ -200,9 +204,14 @@ void analysis_cpp::createNullDistribution(string fout){
                if(qtl_dist_phe_var_from <= upstream_distance[s] && qtl_dist_phe_var_to>= upstream_distance[s]){
                     if(qtl_maf_from <= null_maf[s] && qtl_maf_to >= null_maf[s]){
                         if(nominal[s] != 1){
-                            toRandomPeak.push_back(null_id[s]);
-                            toRandomPeak_regions.push_back({null_chr[s], null_start[s], null_end[s]});
-                            null_index.insert(std::make_pair(null_id[s],s));  
+                            if(mode == NO_RESAMPLING){
+                                if(find(nulldistribution.begin(),nulldistribution.end(), null_id[s]) == nulldistribution.end()){
+                                    toRandomPeak.push_back(null_id[s]);
+                                    toRandomPeak_regions.push_back({null_chr[s], null_start[s], null_end[s]});
+                                    null_index.insert(std::make_pair(null_id[s],s));            
+                                }
+                            }
+                              
                         }
                     }
                 }
@@ -224,11 +233,7 @@ void analysis_cpp::createNullDistribution(string fout){
                     nulldistribution_regions.push_back(toRandomPeak_regions[v[r]]);
                     fdo << toRandomPeak[v[r]];
                     std::unordered_map < std::string, int >::iterator got = null_index.find(toRandomPeak[v[r]]);
-                    
-                    if (mode == NO_RESAMPLING)
-                    {
-                        if(! removeVarFromNull(got->second)) std::cout << "There was a problem" << std::endl;
-                    }
+                
                     if(r < 10) fdo << ",";
                 }
                 fdo << endl;
@@ -241,10 +246,6 @@ void analysis_cpp::createNullDistribution(string fout){
                     
                     std::unordered_map < std::string, int >::iterator got = null_index.find(toRandomPeak[v[r]]);
                     
-                    if (mode == NO_RESAMPLING)
-                    {
-                        if(! removeVarFromNull(got->second)) std::cout << "There was a problem" << std::endl;
-                    }
                     if(r < toRandomPeak.size()) fdo << ",";
                     below_random_threshold++;
                 }
