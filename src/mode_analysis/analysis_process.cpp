@@ -195,7 +195,11 @@ void analysis_cpp::createNullDistribution(string fout){
                                     toRandomPeak.push_back(null_id[s]);
                                     toRandomPeak_regions.push_back({null_chr[s], null_start[s], null_end[s]});
                                     null_index.insert(std::make_pair(null_id[s],s));            
-                                }
+                                }else{
+                                    toRandomPeak.push_back(null_id[s]);
+                                    toRandomPeak_regions.push_back({null_chr[s], null_start[s], null_end[s]});
+                                    null_index.insert(std::make_pair(null_id[s],s));   
+                                } 
                             }
                        }
                    } 
@@ -209,7 +213,11 @@ void analysis_cpp::createNullDistribution(string fout){
                                     toRandomPeak.push_back(null_id[s]);
                                     toRandomPeak_regions.push_back({null_chr[s], null_start[s], null_end[s]});
                                     null_index.insert(std::make_pair(null_id[s],s));            
-                                }
+                                }else{
+                                    toRandomPeak.push_back(null_id[s]);
+                                    toRandomPeak_regions.push_back({null_chr[s], null_start[s], null_end[s]});
+                                    null_index.insert(std::make_pair(null_id[s],s));   
+                                }        
                             }
                               
                         }

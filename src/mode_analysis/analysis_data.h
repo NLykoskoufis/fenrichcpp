@@ -10,7 +10,7 @@ using namespace boost::math;
 
 
 #define RESAMPLING 0
-#define NO_RESAMPLING 1
+#define NO_RESAMPLING 1 
 
 struct genomic_region{
     std::string chrom;
