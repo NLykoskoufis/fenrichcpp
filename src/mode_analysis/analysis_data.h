@@ -87,7 +87,7 @@ public:
     void functionalEnrichment(string);
     //void filterQTL();
     void performIntersect(string);
-
+    bool removeVarFromNull(int&);
 
     // INLINE FUNCTIONS FOR PERFORMANCE
     double fisher_test(unsigned, unsigned, unsigned, unsigned);
