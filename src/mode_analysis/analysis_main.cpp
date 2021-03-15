@@ -22,7 +22,8 @@ void analysis_main(vector < string > & argv) {
     opt_parameters.add_options()
 		("random_var",boost::program_options::value< unsigned int >()->default_value(10), "The number of random_variants to use")
 		("window_size", boost::program_options::value< unsigned int >()->default_value(2500), "Size of the cis-window.")
-        ("maf_window", boost::program_options::value< float >()->default_value(0.01), "Size of the maf_window");
+        ("maf_window", boost::program_options::value< float >()->default_value(0.01), "Size of the maf_window")
+        ("resampling", "Resampling variants when generating the null distribution. [DEFAULT: no resampling]");
 
     D.option_descriptions.add(opt_basic).add(opt_files).add(opt_parameters);
 
@@ -52,6 +53,14 @@ void analysis_main(vector < string > & argv) {
         cout << " * Random variants: " << D.random_variants << endl;
         cout << " * Window size    :" << D.window_size << endl;
         cout << " * MAF window     :" << D.window_maf << endl;
+
+    if (D.options.count("resampling")){
+        D.mode = RESAMPLING;
+        std::cout << " * Resampling of variants for null distribution creation" << std::endl;
+    }else{
+        D.mode = NO_RESAMPLING;
+        std::cout << " * NO resampling of variants for null distribution creationg" << std::endl;
+    }
 
         //Instrumentor::Get().BeginSession("Profiling fenrichpp");
 

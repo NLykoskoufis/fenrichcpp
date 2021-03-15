@@ -9,7 +9,8 @@ using namespace std;
 using namespace boost::math;
 
 
-
+#define RESAMPLING 0
+#define NO_RESAMPLING 1
 
 struct genomic_region{
     std::string chrom;
@@ -27,6 +28,7 @@ public:
     int window_size;
     float window_maf;
     int random_variants;
+    unsigned int mode;
 
     // QTL 
     int qtl_count;
