@@ -225,12 +225,10 @@ void analysis_cpp::createNullDistribution(string fout){
                     fdo << toRandomPeak[v[r]];
                     std::unordered_map < std::string, int >::iterator got = null_index.find(toRandomPeak[v[r]]);
                     
-                    switch (mode){
-                        case NO_RESAMPLING: if(! removeVarFromNull(got->second)) std::cout << "There was a problem" << std::endl; break;
-                        case RESAMPLING: break;
+                    if (mode == NO_RESAMPLING)
+                    {
+                        if(! removeVarFromNull(got->second)) std::cout << "There was a problem" << std::endl;
                     }
-                    
-
                     if(r < 10) fdo << ",";
                 }
                 fdo << endl;
@@ -243,11 +241,10 @@ void analysis_cpp::createNullDistribution(string fout){
                     
                     std::unordered_map < std::string, int >::iterator got = null_index.find(toRandomPeak[v[r]]);
                     
-                    switch (mode){
-                        case NO_RESAMPLING: if(! removeVarFromNull(got->second)) std::cout << "There was a problem" << std::endl; break;
-                        case RESAMPLING: break;
+                    if (mode == NO_RESAMPLING)
+                    {
+                        if(! removeVarFromNull(got->second)) std::cout << "There was a problem" << std::endl;
                     }
-                    
                     if(r < toRandomPeak.size()) fdo << ",";
                     below_random_threshold++;
                 }
