@@ -56,10 +56,10 @@ void analysis_main(vector < string > & argv) {
 
     if (D.options.count("resampling")){
         D.mode = RESAMPLING;
-        std::cout << " * Resampling of variants for null distribution creation" << std::endl;
+        std::cout << " * Resampling ON" << std::endl;
     }else{
         D.mode = NO_RESAMPLING;
-        std::cout << " * NO resampling of variants for null distribution creationg" << std::endl;
+        std::cout << " * Resampling OFF" << std::endl;
     }
 
         //Instrumentor::Get().BeginSession("Profiling fenrichpp");
