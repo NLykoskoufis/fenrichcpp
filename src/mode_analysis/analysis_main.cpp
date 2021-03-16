@@ -74,19 +74,20 @@ void analysis_main(vector < string > & argv) {
         D.readQTL(D.options["qtl"].as<string>()); 
         
         cout << " * Reading [" << D.options["phen"].as<string>() << "]" << std::endl;
-        D.readPhenotypes(D.options["phen"].as<string>());
+        D.readPeakAnnotation(D.options["phen"].as<std::string>());
+        //D.readPhenotypes(D.options["phen"].as<string>());
         
-        for (auto it = D.phen_index.cbegin(); it != D.phen_index.cend(); ++it) {
-            std::cout << "{" << (*it).first << "->" << (*it).second.start << ":" << (*it).second.end << std::endl;
-        }
+        //for (auto it = D.phen_index.cbegin(); it != D.phen_index.cend(); ++it) {
+        //    std::cout << "{" << (*it).first << "->" << (*it).second.start << ":" << (*it).second.end << std::endl;
+        //}
 
         cout << " ** Creating null distribution for the enrichment" << endl;
         D.createNullDistribution(D.options["out"].as<string>());
         
         
         std::cout << " ** Performing qtl intersection" << std::endl;
-        D.performIntersect(D.options["out"].as<string>());
-
+        //D.performIntersect(D.options["out"].as<string>());
+        D.performEnrichment(D.options["out"].as<std::string>());
 
         //Instrumentor::Get().EndSession();
     }   

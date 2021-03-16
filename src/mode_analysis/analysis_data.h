@@ -92,6 +92,13 @@ public:
     bool removeVarFromNull(int&);
     void pickRandomVariants(std::vector < std::string >&, std::vector < genomic_region >&);
 
+    // TESTING CODE
+    void readPeakAnnotation(std::string);
+    std::unordered_map < std::string, std::set < std::string > > anno_dico;
+    std::string mark; // which TF we want to perform an enrichment for
+    void performEnrichment(std::string); 
+
+
     // INLINE FUNCTIONS FOR PERFORMANCE
     double fisher_test(unsigned, unsigned, unsigned, unsigned);
     double odds_ratio(unsigned, unsigned, unsigned, unsigned);
