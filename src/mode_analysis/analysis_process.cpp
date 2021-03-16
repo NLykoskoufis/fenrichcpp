@@ -229,7 +229,6 @@ void analysis_cpp::createNullDistribution(string fout){
             empty++;
 
         }else{
-            //cout << toRandomPeak.size() << endl;
             std::vector < int > v(toRandomPeak.size());
             std::iota(std::begin(v), std::end(v), 0);
             std::shuffle(v.begin(), v.end(), std::default_random_engine(seed));
@@ -239,7 +238,6 @@ void analysis_cpp::createNullDistribution(string fout){
                     nulldistribution.push_back(toRandomPeak[v[r]]);
                     nulldistribution_regions.push_back(toRandomPeak_regions[v[r]]);
                     fdo << toRandomPeak[v[r]];
-                    std::unordered_map < std::string, int >::iterator got = null_index.find(toRandomPeak[v[r]]);
                 
                     if(r < 10) fdo << ",";
                 }
@@ -251,8 +249,6 @@ void analysis_cpp::createNullDistribution(string fout){
                     nulldistribution_regions.push_back(toRandomPeak_regions[v[r]]);
                     fdo << toRandomPeak[v[r]];
                     
-                    std::unordered_map < std::string, int >::iterator got = null_index.find(toRandomPeak[v[r]]);
-                    
                     if(r < toRandomPeak.size()) fdo << ",";
                     below_random_threshold++;
                 }
@@ -261,7 +257,6 @@ void analysis_cpp::createNullDistribution(string fout){
             //cout << nulldistribution.size() << endl;  
         }
     } // QTL for loop
-
 }
 
 

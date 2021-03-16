@@ -49,12 +49,15 @@ void analysis_main(vector < string > & argv) {
         D.random_variants = D.options["random_var"].as < unsigned int >();
         D.window_size = D.options["window_size"].as < unsigned int >();
         D.window_maf = D.options["maf_window"].as < float >();
+        
+        D.mark = D.options["mark"].as < std::string >(); // TEST
 
         cout << "Performing functional enrichment" << endl;
         cout << " * Random variants: " << D.random_variants << endl;
         cout << " * Window size    :" << D.window_size << endl;
         cout << " * MAF window     :" << D.window_maf << endl;
-
+        cout << " * Enrichment for : " << D.mark << std::endl;
+        
     if (D.options.count("resampling")){
         D.mode = RESAMPLING;
         std::cout << " * Resampling ON" << std::endl;
@@ -68,9 +71,6 @@ void analysis_main(vector < string > & argv) {
         cout << " * Reading [" << D.options["null"].as<string>() << "]" << std::endl;
         D.readNull(D.options["null"].as<string>()); 
 
-        //cout << "Reading [" << D.options["phen"].as<string>() << "]"; 
-        //D.readIntersection(D.options["phen"].as<string>()); 
-        
         cout << " * Reading [" << D.options["qtl"].as<string>() << "]" << std::endl;
         D.readQTL(D.options["qtl"].as<string>()); 
         
