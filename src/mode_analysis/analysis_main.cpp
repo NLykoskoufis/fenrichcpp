@@ -16,7 +16,8 @@ void analysis_main(vector < string > & argv) {
 		("null", boost::program_options::value< string >(), "Null file created with fenrich null mode.")
 		("phen", boost::program_options::value< string >(), "Intersection between variants and phenotypes in specific format (see documentation).")
 		("qtl", boost::program_options::value< string >(), "QTLs in QTLtools format.")
-		("out", boost::program_options::value< string >(), "Output file.");
+		("out", boost::program_options::value< string >(), "Output file.")
+        ("mark", boost::program_options::value< std::string>(), "mark to enrich");
 
 	boost::program_options::options_description opt_parameters ("\x1B[32mParameters\33[0m");
     opt_parameters.add_options()
