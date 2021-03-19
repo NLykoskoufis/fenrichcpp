@@ -6,7 +6,6 @@ using namespace std;
 
 void analysis_cpp::readQTL(string fqtl){
     
-    //PROFILE_FUNCTION();
     
     
     input_file fd (fqtl);
@@ -33,6 +32,8 @@ void analysis_cpp::readQTL(string fqtl){
         boost::split(line, buffer, boost::is_any_of(" ")); // Split line
         qtl_count++;
         
+        
+
         snp_id.push_back(line[7]);
         if(has_chr(line[8])){
             snp_chr.push_back(line[8].substr(3,line[8].size()));
@@ -49,10 +50,10 @@ void analysis_cpp::readQTL(string fqtl){
     unordered_map<string,unsigned int> qtl_check;
 
 
-    cout << "Read " << linecount << endl;
+    cout << "Read " << snp_id.size() << " " << linecount  << endl;
     cout << "Processing QTLs. When multiple SNPs, keeping only the one closest to the gene.";
     int multiple=0;
-    for(int i =0; i < linecount; i++){
+    for(int i =0; i < snp_id.size(); i++){
         int dist = 1000000000;
         if(count(snp_id.begin(),snp_id.end(), snp_id[i])==1){
             qtl_id.push_back(snp_id[i]);
@@ -60,7 +61,8 @@ void analysis_cpp::readQTL(string fqtl){
             qtl_chr.push_back(snp_chr[i]);
             qtl_start.push_back(snp_start[i]);
             qtl_end.push_back(snp_end[i]);
-
+            
+            
             // We need to also write the maf
             unordered_map<std::string,float>::iterator got = map_maf.find(snp_id[i]);
             if(got == map_maf.end()){
@@ -79,7 +81,6 @@ void analysis_cpp::readQTL(string fqtl){
                     cout << dist_phe_var[it] << endl;
                     if(abs(dist) < abs(dist_phe_var[it])){
                         continue;
-
                     }else{
                         dist = dist_phe_var[it];
                     }
@@ -105,6 +106,6 @@ void analysis_cpp::readQTL(string fqtl){
     }
     cout << snp_id.size() << " " << qtl_id.size() << endl;
     cout << multiple << endl;
-
+    if(find(qtl_id.begin(), qtl_id.end(), "rs7988669") != qtl_id.end()) std::cout << "rs7988669 is inside qtl vector" << std::endl;
 }
 

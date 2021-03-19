@@ -13,7 +13,7 @@ void analysis_cpp::createNullDistribution(string fout){
     */
    std::string output_name = fout + "_null_distribution_used";
    output_file fdo (output_name);
-   fdo << "qtl_id\tmaf\tdist_phe_var\tmaf_from\tmaf_to\tdist_from\tdist_to\trandom_variants" << endl;
+   fdo << "qtl_id\tmaf\tdist_phe_var\tmaf_from\tmaf_to\tdist_from\tdist_to\tn_random\tall_random\trandom_variants" << endl;
    for(int i=0; i<qtl_id.size(); i++){
         vector < string > toRandomPeak;
         vector < genomic_region > toRandomPeak_regions;
@@ -37,7 +37,7 @@ void analysis_cpp::createNullDistribution(string fout){
             qtl_dist_phe_var_to = qtl_dist_phe_var[i] + window_size;
         }
         // Writing file containing distances and randomly chose variants.
-        fdo << qtl_id[i] << "\t" << to_string(qtl_maf[i]) << "\t" << to_string(qtl_dist_phe_var[i]) << "\t" << to_string(qtl_maf_from) << "\t" << to_string(qtl_maf_to) << "\t" << to_string(qtl_dist_phe_var_from) << "\t" << to_string(qtl_dist_phe_var_to) << "\t";
+        fdo << qtl_id[i] << "\t" << to_string(qtl_maf[i]) << "\t" << to_string(qtl_dist_phe_var[i]) << "\t" << to_string(qtl_maf_from) << "\t" << to_string(qtl_maf_to) << "\t" << to_string(qtl_dist_phe_var_from) << "\t" << to_string(qtl_dist_phe_var_to);
 
         for(int s=0; s < null_count; s++){
            // Check whether eQTL dist and MAF windows are matching with any TEs. 
@@ -63,10 +63,12 @@ void analysis_cpp::createNullDistribution(string fout){
                 }
             }
         }// NULL for loop
+
+        fdo << "\t" << toRandomPeak.size();
         if(toRandomPeak.size() == 0){
             cout << "No variants found" << endl;
             empty++;
-
+            fdo << "." << std::endl;
         }else{
             //cout << toRandomPeak.size() << endl;
             std::vector < int > v(toRandomPeak.size());
@@ -75,21 +77,19 @@ void analysis_cpp::createNullDistribution(string fout){
             
             //std::shuffle(toRandomPeak.begin(), toRandomPeak.end(), std::default_random_engine(seed));
             if(toRandomPeak.size() >= 10){
-                
+                fdo << "\t10\t";
                 for(int r=0; r < 10; r++){
                     nulldistribution.push_back(toRandomPeak[v[r]]);
                     nulldistribution_regions.push_back(toRandomPeak_regions[v[r]]);
-                    fdo << toRandomPeak[v[r]];
-                    if(r < 10) fdo << ",";
+                    fdo << toRandomPeak[v[r]] << ",";
                 }
                 fdo << endl;
             }else{
-                
+                fdo << "\t" << toRandomPeak.size() << "\t";
                 for(int r=0; r < toRandomPeak.size(); r++){
                     nulldistribution.push_back(toRandomPeak[v[r]]);
                     nulldistribution_regions.push_back(toRandomPeak_regions[v[r]]);
-                    fdo << toRandomPeak[v[r]];
-                    if(r < toRandomPeak.size()) fdo << ",";
+                    fdo << toRandomPeak[v[r]] << ",";
                     below_random_threshold++;
                 }
                 fdo << endl;
