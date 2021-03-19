@@ -68,7 +68,7 @@ void analysis_cpp::createNullDistribution(string fout){
         if(toRandomPeak.size() == 0){
             cout << "No variants found" << endl;
             empty++;
-            fdo << "\t." << std::endl;
+            fdo << "\t0\t." << std::endl;
         }else{
             //cout << toRandomPeak.size() << endl;
             std::vector < int > v(toRandomPeak.size());
