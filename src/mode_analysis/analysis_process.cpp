@@ -13,7 +13,7 @@ void analysis_cpp::createNullDistribution(string fout){
     */
    std::string output_name = fout + "_null_distribution_used";
    output_file fdo (output_name);
-   fdo << "qtl_id\tmaf\tdist_phe_var\tmaf_from\tmaf_to\tdist_from\tdist_to\tn_random\tall_random\trandom_variants" << endl;
+   fdo << "qtl_id\tmaf\tdist_phe_var\tmaf_from\tmaf_to\tdist_from\tdist_to\tall_random\tn_random\trandom_variants" << endl;
    for(int i=0; i<qtl_id.size(); i++){
         vector < string > toRandomPeak;
         vector < genomic_region > toRandomPeak_regions;
