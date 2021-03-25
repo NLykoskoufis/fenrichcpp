@@ -7,7 +7,7 @@ void analysis_main(vector < string > & argv) {
     boost::program_options::options_description opt_basic ("\x1B[32mBasics\33[0m");
 	opt_basic.add_options()
 		("help", "Produces option description")
-		("seed", boost::program_options::value< unsigned int >()->default_value(123456), "Random number seed. Useful to replicate runs.")
+		("seed", boost::program_options::value< unsigned int >()->default_value(12345), "Random number seed. Useful to replicate runs.")
 		("log", boost::program_options::value< string >(), "Output on screen goes to this file.")
 		("silent", "Disable screen output");
 
@@ -52,11 +52,10 @@ void analysis_main(vector < string > & argv) {
         cout << " * Random variants: " << D.random_variants << endl;
         cout << " * Window size    : " << D.window_size << endl;
         cout << " * MAF window     : " << D.window_maf << endl;
-
-    if (D.options.count("seed")){
+        // Setting seed
         D.seed = D.options["seed"].as < unsigned int >();
         cout << " * seed           : " << D.options["seed"].as < unsigned int >() << std::endl;
-    }
+    
 
 
         cout << " * Reading [" << D.options["null"].as<string>() << "]" << std::endl;
