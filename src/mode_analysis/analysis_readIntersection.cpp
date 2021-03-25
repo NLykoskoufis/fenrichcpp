@@ -4,7 +4,6 @@ using namespace std;
 
 void analysis_cpp::readIntersection(string finter){
 
-    //PROFILE_FUNCTION();
 
     input_file fd (finter);
     unsigned int linecount=0;

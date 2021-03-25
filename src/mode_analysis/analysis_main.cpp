@@ -47,13 +47,17 @@ void analysis_main(vector < string > & argv) {
         D.random_variants = D.options["random_var"].as < unsigned int >();
         D.window_size = D.options["window_size"].as < unsigned int >();
         D.window_maf = D.options["maf_window"].as < float >();
-
+    
         cout << "Performing functional enrichment" << endl;
         cout << " * Random variants: " << D.random_variants << endl;
-        cout << " * Window size    :" << D.window_size << endl;
-        cout << " * MAF window     :" << D.window_maf << endl;
+        cout << " * Window size    : " << D.window_size << endl;
+        cout << " * MAF window     : " << D.window_maf << endl;
 
-        //Instrumentor::Get().BeginSession("Profiling fenrichpp");
+    if (D.options.count("seed")){
+        D.seed = D.options["seed"].as < unsigned int >();
+        cout << " * seed           : " << D.options["seed"].as < unsigned int >() << std::endl;
+    }
+
 
         cout << " * Reading [" << D.options["null"].as<string>() << "]" << std::endl;
         D.readNull(D.options["null"].as<string>()); 
@@ -79,6 +83,6 @@ void analysis_main(vector < string > & argv) {
         D.performIntersect(D.options["out"].as<string>());
 
 
-        //Instrumentor::Get().EndSession();
+      
     }   
 }
