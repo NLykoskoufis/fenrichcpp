@@ -61,7 +61,7 @@ public:
     int below_random_threshold =0;
 
     // NULL DISTRIBUTION CREATION VARIABLES 
-    //unsigned int seed=12345;
+    unsigned int seed;
 
     // READ INTERSECTION DATA
     int intersection_count;
