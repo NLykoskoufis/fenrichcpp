@@ -11,10 +11,10 @@ void analysis_cpp::createNullDistribution(string fout){
 
     When the null distribution of SNPs are done, then we can perform the functional enrichment. 
     */
-    std::string output_name = fout + "_null_distribution_used";
-    output_file fdo (output_name);
-    fdo << "qtl_id\tmaf\tdist_phe_var\tmaf_from\tmaf_to\tdist_from\tdist_to\tall_random\tn_random\trandom_variants" << endl;
-    for(int i=0; i<qtl_id.size(); i++){
+   std::string output_name = fout + "_null_distribution_used";
+   output_file fdo (output_name);
+   fdo << "qtl_id\tmaf\tdist_phe_var\tmaf_from\tmaf_to\tdist_from\tdist_to\tall_random\tn_random\trandom_variants" << endl;
+   for(int i=0; i<qtl_id.size(); i++){
         vector < string > toRandomPeak;
         vector < genomic_region > toRandomPeak_regions;
         cout << "Processed " << i+1 << " eQTLs." << endl;
@@ -29,10 +29,10 @@ void analysis_cpp::createNullDistribution(string fout){
         qtl_maf_from = qtl_maf[i] - (qtl_maf[i] * window_maf);
         qtl_maf_to = qtl_maf[i] + (qtl_maf[i] * window_maf);
 
-        if(qtl_dist_phe_var[i] < 0){ // Negative distance: The variant is upstream of the TSS.
+        if(qtl_dist_phe_var[i] < 0){
             qtl_dist_phe_var_to = (qtl_dist_phe_var[i] + window_size) > 0 ? 0:(qtl_dist_phe_var[i] + window_size);
             qtl_dist_phe_var_from = qtl_dist_phe_var[i] - window_size;
-        }else{ // Positive distance: The variant is downstream of the TSS.
+        }else{
             qtl_dist_phe_var_from = (qtl_dist_phe_var[i] - window_size) < 0 ? 0:(qtl_dist_phe_var[i] - window_size);
             qtl_dist_phe_var_to = qtl_dist_phe_var[i] + window_size;
         }
@@ -44,9 +44,9 @@ void analysis_cpp::createNullDistribution(string fout){
            // If they do not match, through message
            
            if(qtl_dist_phe_var[i] > 0){
-               if(qtl_dist_phe_var_from <= downstream_distance[s] && qtl_dist_phe_var_to >= downstream_distance[s]){
+               if(qtl_dist_phe_var_from <= downstream_distance[s] && qtl_dist_phe_var_to>= downstream_distance[s]){
                    if(qtl_maf_from <= null_maf[s] && qtl_maf_to >= null_maf[s]){
-                       if(nominal[s] != 1 && find(nulldistribution.begin(),nulldistribution.end(), null_id[s]) == nulldistribution.end()){ // Check whether the SNP is not a nominal eQTL and that the SNP is not already in the null distribution! The later is not very efficient but did not have time yet to modify it
+                       if(nominal[s] != 1 && find(nulldistribution.begin(),nulldistribution.end(), null_id[s]) == nulldistribution.end()){
                            toRandomPeak.push_back(null_id[s]);
                            toRandomPeak_regions.push_back({null_chr[s], null_start[s], null_end[s]});
                        }

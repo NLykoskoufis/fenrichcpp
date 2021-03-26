@@ -106,5 +106,6 @@ void analysis_cpp::readQTL(string fqtl){
     }
     cout << snp_id.size() << " " << qtl_id.size() << endl;
     cout << multiple << endl;
+    if(find(qtl_id.begin(), qtl_id.end(), "rs7988669") != qtl_id.end()) std::cout << "rs7988669 is inside qtl vector" << std::endl;
 }
 

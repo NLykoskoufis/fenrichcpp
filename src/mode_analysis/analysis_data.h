@@ -27,7 +27,8 @@ public:
     int window_size;
     float window_maf;
     int random_variants;
-
+    unsigned int seed=12345;
+    
     // QTL 
     int qtl_count;
     vector < string >  qtl_id;
@@ -60,7 +61,7 @@ public:
     int empty=0;
     int below_random_threshold =0;
     // NULL DISTRIBUTION CREATION VARIABLES 
-    unsigned int seed;
+    unsigned int seed=12345;
 
     // READ INTERSECTION DATA
     int intersection_count;

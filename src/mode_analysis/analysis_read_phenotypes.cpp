@@ -3,6 +3,8 @@
 void analysis_cpp::readPhenotypes(std::string fbed)
 {
 
+    //PROFILE_FUNCTION();
+
     input_file fd (fbed);
     std::string buffer;
     std::vector < std::string > line;
