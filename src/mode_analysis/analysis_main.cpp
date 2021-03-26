@@ -70,9 +70,9 @@ void analysis_main(vector < string > & argv) {
         cout << " * Reading [" << D.options["phen"].as<string>() << "]" << std::endl;
         D.readPhenotypes(D.options["phen"].as<string>());
         
-        for (auto it = D.phen_index.cbegin(); it != D.phen_index.cend(); ++it) {
-            std::cout << "{" << (*it).first << "->" << (*it).second.start << ":" << (*it).second.end << std::endl;
-        }
+        //for (auto it = D.phen_index.cbegin(); it != D.phen_index.cend(); ++it) {
+        //    std::cout << "{" << (*it).first << "->" << (*it).second.start << ":" << (*it).second.end << std::endl;
+        //}
 
         cout << " ** Creating null distribution for the enrichment" << endl;
         D.createNullDistribution(D.options["out"].as<string>());
