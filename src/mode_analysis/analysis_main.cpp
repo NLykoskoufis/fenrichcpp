@@ -53,8 +53,8 @@ void analysis_main(vector < string > & argv) {
         cout << " * Window size    : " << D.window_size << endl;
         cout << " * MAF window     : " << D.window_maf << endl;
         // Setting seed
-        //D.seed = D.options["seed"].as < unsigned int >();
-        //cout << " * seed           : " << D.options["seed"].as < unsigned int >() << std::endl;
+        D.seed = D.options["seed"].as < unsigned int >();
+        cout << " * seed           : " << D.options["seed"].as < unsigned int >() << std::endl;
     
 
 
