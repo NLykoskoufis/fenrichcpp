@@ -27,8 +27,7 @@ public:
     int window_size;
     float window_maf;
     int random_variants;
-    unsigned int seed=12345;
-    
+
     // QTL 
     int qtl_count;
     vector < string >  qtl_id;
@@ -60,6 +59,7 @@ public:
     unordered_map <string, int> removeVar; 
     int empty=0;
     int below_random_threshold =0;
+
     // NULL DISTRIBUTION CREATION VARIABLES 
     unsigned int seed=12345;
 
