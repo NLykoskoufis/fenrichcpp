@@ -46,7 +46,8 @@ void analysis_cpp::createNullDistribution(string fout){
            if(qtl_dist_phe_var[i] > 0){
                if(qtl_dist_phe_var_from <= downstream_distance[s] && qtl_dist_phe_var_to>= downstream_distance[s]){
                    if(qtl_maf_from <= null_maf[s] && qtl_maf_to >= null_maf[s]){
-                       if(nominal[s] != 1 && find(nulldistribution.begin(),nulldistribution.end(), null_id[s]) == nulldistribution.end()){
+                       //if(nominal[s] != 1 && find(nulldistribution.begin(),nulldistribution.end(), null_id[s]) == nulldistribution.end()){
+                        if(nominal[s] != 1){
                            toRandomPeak.push_back(null_id[s]);
                            toRandomPeak_regions.push_back({null_chr[s], null_start[s], null_end[s]});
                        }
@@ -55,7 +56,8 @@ void analysis_cpp::createNullDistribution(string fout){
            }else{
                if(qtl_dist_phe_var_from <= upstream_distance[s] && qtl_dist_phe_var_to>= upstream_distance[s]){
                     if(qtl_maf_from <= null_maf[s] && qtl_maf_to >= null_maf[s]){
-                        if(nominal[s] != 1 && find(nulldistribution.begin(),nulldistribution.end(),null_id[s]) == nulldistribution.end()){
+                        //if(nominal[s] != 1 && find(nulldistribution.begin(),nulldistribution.end(),null_id[s]) == nulldistribution.end()){
+                        if (nominal[s] != 1){
                             toRandomPeak.push_back(null_id[s]);
                             toRandomPeak_regions.push_back({null_chr[s], null_start[s], null_end[s]});
                         }
