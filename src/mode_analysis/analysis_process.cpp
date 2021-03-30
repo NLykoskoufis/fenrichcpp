@@ -78,9 +78,9 @@ void analysis_cpp::createNullDistribution(string fout){
             std::shuffle(v.begin(), v.end(), std::default_random_engine(seed));
             
             //std::shuffle(toRandomPeak.begin(), toRandomPeak.end(), std::default_random_engine(seed));
-            if(toRandomPeak.size() >= 10){
-                fdo << "\t10\t";
-                for(int r=0; r < 10; r++){
+            if(toRandomPeak.size() >= random_variants){
+                fdo << "\t" << random_variants << "\t";
+                for(int r=0; r < random_variants; r++){
                     nulldistribution.push_back(toRandomPeak[v[r]]);
                     nulldistribution_regions.push_back(toRandomPeak_regions[v[r]]);
                     fdo << toRandomPeak[v[r]] << ",";
