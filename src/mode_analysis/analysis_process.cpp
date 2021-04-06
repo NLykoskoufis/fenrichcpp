@@ -160,11 +160,5 @@ void analysis_cpp::functionalEnrichment(string fout){
         fdo << to_string(qtl_overlap) << "\t" << to_string(null_overlap) << "\t" << to_string(qtl_no_overlap) << "\t" << to_string(null_no_overlap) << "\t" << to_string(oddsratio) << "\t" << strs.str() << endl;
     }
     
-
-
-
-    
-    
-    
 }
 
