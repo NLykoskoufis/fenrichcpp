@@ -42,13 +42,7 @@ void analysis_cpp::performIntersect(std::string fout){
         }
     }
     int qtl_no_overlap = qtl_id.size() - qtl_overlap;
-    int null_no_overlap = nulldistribution.size() - null_overlap;
-    
-    if(qtl_overlap == 0 || null_overlap == 0)
-    {
-        qtl_overlap++;
-        null_overlap++;
-    } 
+    int null_no_overlap = nulldistribution.size() - null_overlap; 
 
     std::cout << qtl_overlap << " " << qtl_no_overlap <<  std::endl;
     std::cout << null_overlap << " " << null_no_overlap << std::endl;
