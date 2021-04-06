@@ -137,7 +137,7 @@ void analysis_cpp::functionalEnrichment(string fout){
     if (qtl_overlap == 0 && null_overlap == 0)
     {
         fdo << to_string(qtl_overlap) << "\t" << to_string(null_overlap) << "\t" << to_string(qtl_no_overlap) << "\t" << to_string(null_no_overlap) << "\tNA\tNA" << endl;
-    }else if (qtl_overlap != 0 && null_overlap == 0 || qtl_overlap == 0 && null_overlap != 0) {
+    }else if ((qtl_overlap != 0 && null_overlap == 0) || (qtl_overlap == 0 && null_overlap != 0)) {
         qtl_overlap = qtl_overlap + 1;
         null_overlap = null_overlap + 1;
         
