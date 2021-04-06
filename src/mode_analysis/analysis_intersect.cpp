@@ -44,30 +44,6 @@ void analysis_cpp::performIntersect(std::string fout){
     int qtl_no_overlap = qtl_id.size() - qtl_overlap;
     int null_no_overlap = nulldistribution.size() - null_overlap;
     
-    if(qtl_overlap == 0 || null_overlap == 0)
-    {
-        qtl_overlap++;
-        null_overlap++;
-    } 
-
-    std::cout << qtl_overlap << " " << qtl_no_overlap <<  std::endl;
-    std::cout << null_overlap << " " << null_no_overlap << std::endl;
-
-    double fisher = fisher_test(qtl_overlap,null_overlap, qtl_no_overlap,null_no_overlap);
-    double oddsratio = odds_ratio(qtl_overlap,null_overlap, qtl_no_overlap,null_no_overlap);
-
-    std::cout << " ** Performing Enrichment using Fisher exact test." << std::endl;
-    
-    output_file fdo (fout);
-    fdo << "A\tB\tC\tD\tOddsRatio\tpvalue" << endl;
-    
-    cout << "qtl overlap: " << qtl_overlap << "\nqtl no overlap: " << qtl_no_overlap << "\nnull_overlap: " << null_overlap << "\nnull_no_overlap: " << null_no_overlap << endl;
-    cout << fisher << endl;
-    cout << oddsratio << endl;
-    std::ostringstream strs;
-    strs << fisher;
-
-
-    fdo << to_string(qtl_overlap) << "\t" << to_string(null_overlap) << "\t" << to_string(qtl_no_overlap) << "\t" << to_string(null_no_overlap) << "\t" << to_string(oddsratio) << "\t" << strs.str() << endl;
+    fdo << to_string(qtl_overlap) << "\t" << to_string(null_overlap) << "\t" << to_string(qtl_no_overlap) << "\t" << to_string(null_no_overlap)  << endl;
 
 }
