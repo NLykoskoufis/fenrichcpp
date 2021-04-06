@@ -44,6 +44,18 @@ void analysis_cpp::performIntersect(std::string fout){
     int qtl_no_overlap = qtl_id.size() - qtl_overlap;
     int null_no_overlap = nulldistribution.size() - null_overlap;
     
-    fdo << to_string(qtl_overlap) << "\t" << to_string(null_overlap) << "\t" << to_string(qtl_no_overlap) << "\t" << to_string(null_no_overlap)  << endl;
+    if(qtl_overlap == 0 || null_overlap == 0)
+    {
+        qtl_overlap++;
+        null_overlap++;
+    } 
+
+    std::cout << qtl_overlap << " " << qtl_no_overlap <<  std::endl;
+    std::cout << null_overlap << " " << null_no_overlap << std::endl;
+
+    output_file fdo (fout);
+    fdo << "A\tB\tC\tD" << endl;
+
+    fdo << to_string(qtl_overlap) << "\t" << to_string(null_overlap) << "\t" << to_string(qtl_no_overlap) << "\t" << to_string(null_no_overlap) << endl;
 
 }
