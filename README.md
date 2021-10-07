@@ -45,7 +45,7 @@ fenrich null \
     --region <chromosome>
 ```
 
---vcf | vcf file (should be the same as the one you used for eQTL discovery)
+--vcf | vcf file (should be the same as the one you used for eQTL discovery) !!! VCF file should contain GT information
 
 --bed | bed file containing gene positions (should be the same bed file as the one used for eQTL discovery)
 
