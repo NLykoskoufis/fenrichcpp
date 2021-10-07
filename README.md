@@ -46,7 +46,9 @@ fenrich null \
 ```
 
 --vcf | vcf file (should be the same as the one you used for eQTL discovery)
+
 --bed | bed file containing gene positions (should be the same bed file as the one used for eQTL discovery)
+
 --qtl | txt file containing SNPid of nominally significant SNPs (one per line).
 
 
