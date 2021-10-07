@@ -45,6 +45,13 @@ fenrich null \
     --region <chromosome>
 ```
 
+--vcf | vcf file (should be the same as the one you used for eQTL discovery)
+--bed | bed file containing gene positions (should be the same bed file as the one used for eQTL discovery)
+--qtl | txt file containing SNPid of nominally significant SNPs (one per line).
+
+
+
+
 ### Step3: Run enrichment analysis 
 
 By default the window size is set to ± 2'500, the maf window to ±2% and the number of random variants to 10. You can always change these parameters if needed.
@@ -59,5 +66,4 @@ fenrich enrich \
     --phen <phenotypes> \
     --out <out file> 
 ```
-
-
+--phen | the phenotypes you want to enrich your eQTL SNPs for in bed format.
