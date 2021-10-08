@@ -75,8 +75,8 @@ The output of fenrich is a file containing 4 columns:
 A     B     C     D
 323   47    13509 1511
 
-| eQTL | null | 
-| ------ | ------- |
+| | eQTL | null | 
+| ------- | ------ | ------- |
 |overlap | A | B |
 |no overlap | C | D |
 
