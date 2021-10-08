@@ -76,8 +76,9 @@ A     B     C     D
 323   47    13509 1511
 
 | eQTL | null | 
-overlap | A | B |
-no overlap | C | D |
+|:--------------:|
+|overlap | A | B |
+|no overlap | C | D |
 
 
 
