@@ -73,6 +73,7 @@ fenrich enrich \
 The output of fenrich is a file containing 4 columns: 
 
 A     B     C     D
+
 323   47    13509 1511
 
 | | eQTL | null | 
@@ -80,5 +81,10 @@ A     B     C     D
 |overlap | A | B |
 |no overlap | C | D |
 
-
+Then you can load this into R to get the enrichment by using a fisher exact test. 
+```{r}
+D = read.table("fenrich_output.txt",header=TRUE,sep="\t",stringsAsFactors=FALSE)
+mat = matrix(D,ncol=2, byrow=TRUE)
+fisher.test(mat)
+```
 
