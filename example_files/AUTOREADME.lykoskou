@@ -1,0 +1,106 @@
+#[2022-07-28 12:00:50 PM]
+cd example_files
+#[2022-07-28 12:00:51 PM]
+lh
+#[2022-07-28 12:01:00 PM]
+less -S genotypes.chr22.vcf.gz
+#[2022-07-28 12:01:03 PM]
+lh
+#[2022-07-28 12:01:31 PM]
+rm GWAS.b37.txt HG00381.chr22.bam HG00381.chr22.bam.bai hotspots_b37_hg19.bed genes.simulated.chr22.bed.gz.tbi genes.simulated.chr22.bed.gz
+#[2022-07-28 12:01:36 PM]
+lh
+#[2022-07-28 12:01:42 PM]
+rm exons.50percent.chr22.bed.gz.tbi exons.50percent.chr22.bed.gz 
+#[2022-07-28 12:01:43 PM]
+lh
+#[2022-07-28 12:01:54 PM]
+less -S results.genes.full.txt.gz
+#[2022-07-28 12:03:33 PM]
+QTLtools cis --vcf genotypes.chr22.vcf.gz --bed genes.50percent.chr22.bed.gz --cov genes.covariates.pc50.txt.gz --nominal 1 --normal --out results.genes.nominal1.txt.gz
+#[2022-07-28 12:03:35 PM]
+lh
+#[2022-07-28 12:03:44 PM]
+less -S results.genes.nominal1.txt.gz
+#[2022-07-28 12:03:59 PM]
+zcat results.genes.nominal1.txt.gz | head -1 
+#[2022-07-28 12:05:34 PM]
+less -S submitNull_normal.sh
+#[2022-07-28 12:05:57 PM]
+QTLtools cis --vcf genotypes.chr22.vcf.gz --bed genes.50percent.chr22.bed.gz --cov genes.covariates.pc50.txt.gz --nominal 0.05 --normal --out results.genes.nominal005.txt.gz
+#[2022-07-28 12:05:59 PM]
+lh
+#[2022-07-28 12:06:02 PM]
+rm results.genes.nominal1.txt.gz
+#[2022-07-28 12:06:22 PM]
+zcat results.genes.nominal005.txt.gz | cut -d" " -f8 | sort | uniq > nominal_only_significant_snps.txt 
+#[2022-07-28 12:06:30 PM]
+less -S nominal_only_significant_snps.txt
+#[2022-07-28 12:06:33 PM]
+lh
+#[2022-07-28 12:06:38 PM]
+bgzip nominal_only_significant_snps.txt
+#[2022-07-28 12:06:39 PM]
+lh
+#[2022-07-28 12:06:56 PM]
+less -S results.genes.full.txt.gz
+#[2022-07-28 12:07:35 PM]
+less -S results.genes.full.txt.gz
+#[2022-07-28 12:07:53 PM]
+zcat results.genes.full.txt.gz | awk '{if($20 < 0.05) {print}}' 
+#[2022-07-28 12:08:15 PM]
+zcat results.genes.full.txt.gz | awk '{if($19 < 0.05) {print}}' 
+#[2022-07-28 12:08:16 PM]
+zcat results.genes.full.txt.gz | awk '{if($19 < 0.05) {print}}' 
+#[2022-07-28 12:08:49 PM]
+zcat results.genes.full.txt.gz | awk '{if($19 < 0.05) {print}}' 
+#[2022-07-28 12:08:53 PM]
+rm results.genes.full.txt.gz
+#[2022-07-28 12:09:46 PM]
+cd example_files
+#[2022-07-28 12:09:52 PM]
+fenrich null --help
+#[2022-07-28 12:10:23 PM]
+QTLtools cis --vcf genotypes.chr22.vcf.gz --bed genes.50percent.chr22.bed.gz --cov genes.covariates.pc50.txt.gz --permute 100 --normal --out results.genes.full.txt.gz
+#[2022-07-28 12:10:32 PM]
+fenrich null --vcf genotypes.chr22.vcf.gz --bed genes.50percent.chr22.bed.gz --qtl nominal_only_significant_snps.txt.gz --out null_variantFile.txt.gz
+#[2022-07-28 12:10:35 PM]
+lh
+#[2022-07-28 12:10:48 PM]
+less -S null_variantFile.txt.gz
+#[2022-07-28 12:10:53 PM]
+zcat null_variantFile.txt.gz| wc -l
+#[2022-07-28 12:10:57 PM]
+lh
+#[2022-07-28 12:11:06 PM]
+zcat results.genes.full.txt.gz | awk '{if($20 < 0.05) {print}}' 
+#[2022-07-28 12:11:21 PM]
+zcat results.genes.full.txt.gz | awk '{if($20 < 0.05) {print}}' > results.permute.genes.significant.txt
+#[2022-07-28 12:11:21 PM]
+lh
+#[2022-07-28 12:11:25 PM]
+bgzip results.permute.genes.significant.txt
+#[2022-07-28 12:11:28 PM]
+lh
+#[2022-07-28 12:11:34 PM]
+less -S TFs.encode.bed.gz
+#[2022-07-28 12:11:39 PM]
+lh
+#[2022-07-28 12:11:44 PM]
+rm results.genes.full.txt.gz 
+#[2022-07-28 12:11:45 PM]
+lh
+#[2022-07-28 12:11:48 PM]
+rm results.genes.nominal005.txt.gz
+#[2022-07-28 12:11:49 PM]
+lh
+#[2022-07-28 12:12:14 PM]
+fenrich enrich --help
+#[2022-07-28 12:13:29 PM]
+fenrich enrich --null null_variantFile.txt.gz --phen TFs.encode.bed.gz --qtl results.permute.genes.significant.txt.gz --out qtlTFenrichment.txt --random_var 100 --window_size 2500 --maf_window 0.01
+#[2022-07-28 12:13:31 PM]
+lh
+#[2022-07-28 12:13:36 PM]
+less -S qtlTFenrichment.txt
+#[2022-07-28 12:13:47 PM]
+less -S qtlTFenrichment.txt_null_distribution_used
