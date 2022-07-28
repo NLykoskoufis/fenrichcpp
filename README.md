@@ -8,82 +8,53 @@ The functional enrichment is performed in two steps. The first step creates a fi
 
 ## Step by step example
 
-### Step1: Check that phenotype file is sorted.
+### Step1: Create null file 
 
-First, we need to check that the phenotype file is sorted. If not sorted then please sort using either unix-sort or bedtools sort. The file should be in bed format without the header.
+Before creating the null file you also need to provide a list of variants that are nominally significant eQTLs. These can be provided by using QTLtools cis --nominal 0.05. Then you need to only keep the var_id. It should be the 8th column.
 
-```bash
-bedtools sort -i H3K4me3_data.bed > H3K4me3_data_sorted.bed
-# or 
-sort -V -k1 -k2,2n -k3,3n H3K4me3_data.bed > H3K4me3_data_sorted.bed
-```
-
-
-### Step2: Create null file 
-
-Before creating the null file you also need to provide a list of variants that are nominally significant eQTLs. These can be provided by using QTLtools cis --nominal 0.05. Then you need to only keep the var_id. It should be the 8th column
-```bash
-zcat nominal005_chrALL.txt.gz | cut -d" " -f8 | sort | uniq > nominal_only_significant_snps.txt
-```
 
 ```bash
 fenrich null \
-    --vcf <vcf file> \
-    --bed <bed file> \
-    --qtl <QTLs> \
-    --out <output file>
+  --vcf genotypes.chr22.vcf.gz \
+  --bed genes.50percent.chr22.bed.gz \
+  --qtl nominal_only_significant_snps.txt.gz \
+  --out null_variantFile.txt.gz
 ```
 
-In order to speed the process you can also perform this by chromosome
-
-```bash
-fenrich null \
-    --vcf <vcf file> \
-    --bed <bed file> \
-    --qtl <QTLs> \
-    --out <output file> \
-    --region <chromosome>
-```
-
---vcf | vcf file (should be the same as the one you used for eQTL discovery) !!! VCF file should contain GT information
-
---bed | bed file containing gene positions (should be the same bed file as the one used for eQTL discovery)
-
---qtl | txt file containing SNPid of nominally significant SNPs (one per line).
 
 
-
-
-### Step3: Run enrichment analysis 
-
-By default the window size is set to ± 2'500, the maf window to ±2% and the number of random variants to 10. You can always change these parameters if needed.
+### Step2: Run enrichment analysis 
 
 **IMPORTANT: the eQTL results should be in QTLtools cis format. Please check QTLtools for the exact format to use.**
 
 
 ```bash
 fenrich enrich \
-    --nul <null file > \
-    --qtl <qtls to be enriched> \
-    --phen <phenotypes> \
-    --out <out file> 
+  --null null_variantFile.txt.gz \
+  --phen TFs.encode.bed.gz \
+  --qtl results.permute.genes.significant.txt.gz \
+  --out qtlTFenrichment.txt \
+  --random_var 100 \
+  --window_size 2500 \
+  --maf_window 0.02
+
 ```
---phen | the phenotypes you want to enrich your eQTL SNPs for in bed format.
 
-The output of fenrich is a file containing 4 columns: 
+The output of fenrich enrich mode looks like this: 
 
-A     B     C     D
+```
+#A       B       C       D
+#59      22      214     531
+```
+A -> Number of eQTLs overlapping with the peaks. 
+B -> Number of null variants overlapping with peaks. 
+C -> Number of eQTls not overlapping with peaks. 
+D -> Number of null variants not overlapping with peaks. 
 
-323   47    13509 1511
+Next, you can load the results file into R, create a matrix and run a fisher exact test as shown below. 
 
-| | eQTL | null | 
-| ------- | ------ | ------- |
-|overlap | A | B |
-|no overlap | C | D |
-
-Then you can load this into R to get the enrichment by using a fisher exact test. 
 ```{r}
-D = read.table("fenrich_output.txt",header=TRUE,sep="\t",stringsAsFactors=FALSE)
+D = read.table("qtlTFenrichment.txt",header=TRUE,sep="\t",stringsAsFactors=FALSE)
 mat = matrix(D,ncol=2, byrow=TRUE)
 fisher.test(mat)
 ```
