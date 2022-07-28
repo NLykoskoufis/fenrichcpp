@@ -16,7 +16,7 @@ sudo apt install g++ gcc gfortran make autoconf automake libtool zlib1g-dev libl
 ```
 
 
-2. You will need to download HTSlib and boost libraries. 
+2. You will need to download the HTSlib library 
 
 ```bash 
 mkdir ~/Tools
