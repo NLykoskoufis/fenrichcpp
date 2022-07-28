@@ -1,3 +1,18 @@
+##########################################
+# SET THESE 6 PATHS CORRECTLY TO COMPILE #
+##########################################
+BOOST_INC=
+BOOST_LIB=
+HTSLD_INC=
+HTSLD_LIB=
+#########################################################
+# EXAMPLES:                                             #
+# BOOST_INC=/usr/include/                               #
+# BOOST_LIB=/usr/lib/x86_64-linux-gnu/                  #
+# HTSLD_INC=$(HOME)/Tools/htslib-1.9                    #
+# HTSLD_LIB=$(HOME)/Tools/htslib-1.9                    #
+#########################################################
+
 
 define n
 
