@@ -47,8 +47,11 @@ The output of fenrich enrich mode looks like this:
 #59      22      214     531
 ```
 A -> Number of eQTLs overlapping with the peaks. 
+
 B -> Number of null variants overlapping with peaks. 
+
 C -> Number of eQTls not overlapping with peaks. 
+
 D -> Number of null variants not overlapping with peaks. 
 
 Next, you can load the results file into R, create a matrix and run a fisher exact test as shown below. 
